@@ -1,0 +1,20 @@
+{
+  "name": "bower.json",
+  "description": "This application for a beginner need to learn about node.js and es6.",
+  "main": "server.js",
+  "authors": [
+    "Krissada Boontrigratn"
+  ],
+  "license": "ISC",
+  "homepage": "https://github.com/namchapaysbuy/namcha",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "^3.3.7"
+  }
+}
