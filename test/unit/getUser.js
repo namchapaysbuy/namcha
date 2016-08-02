@@ -1,9 +1,9 @@
 describe('[test model user.js] try to get user', function() {
-  before(function() {
-    request = require('supertest')
-    expect = require('chai').expect
-    app = require('../server')
-  })
+  // before(function() {
+  //   request = require('supertest')
+  //   expect = require('chai').expect
+  //   app = require('../server')
+  // })
 
   it('should return 200 and get 2 datas', function(done) {
     done()
