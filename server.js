@@ -9,7 +9,6 @@ const http = require('http'),
       express = require('express'),
       app = express(),
       bodyParser = require('body-parser'),
-      useragent = require('express-useragent'),
       colors = require('colors/safe'),
       stylus = require('stylus'),
       nib = require('nib'),
@@ -35,17 +34,9 @@ app.locals = {
  */
 app.disable('x-powered-by')
 
-/**
- * app.engine: using handlebars to be template engine
- * -- 'helpers': require('./config/handlebars-helpers')
- */
-var hbs = require('express-handlebars').create({
-  'defaultLayout': 'master',
-  'extname'      : '.hbs',
-  'layoutsDir'   : './apps/views/layout',
-  'partialsDir'  : './apps/views/partials'
-})
-app.engine('.hbs', hbs.engine);
+
+app.set('view engine', 'ejs')
+app.set('views', 'apps/views')
 
 /**
  * app.set: set config for using express.js
@@ -66,7 +57,6 @@ let compile = function(str, path) {
 }
 
 app.use(
-  useragent.express(),
   stylus.middleware({
     src: './apps/resources/css',
     dest: './public/css',
