@@ -8,6 +8,10 @@ const router = require('express').Router(),
  */
 // router.route('/').get(pageController.getMainpage)
 
+router.route('/').get(pageController.getMainpage)
+
+router.route('/me').get(pageController.getMe)
+
 /**
  * 404 page notfound.
  */
