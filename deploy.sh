@@ -1,3 +1,5 @@
+cd ~/projects/namcha
+
 echo "pulling code from git"
 git pull
 
