@@ -1,1 +1,2 @@
-ssh -i namcha-key.pem -o StrictHostKeyChecking=no ubuntu@54.169.173.27 'echo test > /home/ubuntu/test.txt'
+apt-get install sshpass
+sshpass -p 'pass@word1' ssh namcha@54.169.173.27 'echo test > /home/test.txt'
