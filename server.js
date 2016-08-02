@@ -58,10 +58,11 @@ let compile = function(str, path) {
 app.use(
   stylus.middleware({
     src: './apps/resources/css',
-    dest: './public/css',
+    dest: './css',
     compile: compile,
   }),
-  express.static('./public'),
+  // express.static('./public'),
+  express.static('.'),
   bodyParser.json({ 'type': 'application/json' }),
   bodyParser.urlencoded({ 'extended': true }),
   middlewares,
