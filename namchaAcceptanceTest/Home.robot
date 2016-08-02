@@ -2,6 +2,11 @@
 Library           Selenium2Library
 
 *** Test Cases ***               
-Open Browser To Target Page
+Send button should enabled after all required input fields.
      Open Browser    http://localhost:3000/
-     Maximize Browser Window
+     Maximize Browser Window 
+     Input Text    inputTo    namcha@bot.com
+     Input Text    inputTopic    This is a subject automate test
+     Input Text    inputBody    This is a body automate test.
+     Element Should Be Enabled    buttonSend
+     Close Browser
