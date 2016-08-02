@@ -4,7 +4,7 @@
   "description": "This application for a beginner need to learn about node.js and es6.",
   "main": "server.js",
   "scripts": {
-    "test": "mocha"
+    "test": "mocha test/unit"
   },
   "author": "Krissada Boontrigratn",
   "license": "ISC",
