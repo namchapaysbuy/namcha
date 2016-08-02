@@ -1,0 +1,15 @@
+.DS_Store
+node_modules
+node_modules/*
+log
+public/uploads
+public/uploads/*
+tmp/*
+*.sublime*
+public/min/*
+npm-debug.log
+*.bak*
+*.rdb
+docker-compose.yml
+Dockerfile
+test/*.test.js*
