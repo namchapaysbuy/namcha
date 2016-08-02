@@ -34,7 +34,6 @@ app.locals = {
  */
 app.disable('x-powered-by')
 
-
 app.set('view engine', 'ejs')
 app.set('views', 'apps/views')
 
