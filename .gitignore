@@ -13,3 +13,6 @@ npm-debug.log
 docker-compose.yml
 Dockerfile
 test/*.test.js*
+namchaAcceptanceTest/log.html
+namchaAcceptanceTest/output.xml
+namchaAcceptanceTest/report.html
