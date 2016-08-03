@@ -13,6 +13,7 @@ const http = require('http'),
       stylus = require('stylus'),
       nib = require('nib'),
       moment = require('moment'),
+      mime = require('mime'),
       
       /**
        * local requiring modules
@@ -54,6 +55,9 @@ let compile = function(str, path) {
          .set('filename', path)
          .use(nib())
 }
+
+
+mime.define({'text/plain' : ['tag']})
 
 app.use(
   stylus.middleware({
