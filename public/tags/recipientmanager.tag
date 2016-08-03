@@ -47,7 +47,7 @@
 
   <ul>
     <li each='{ opts.items }' data-pid="{ pid }">
-      <input type='checkbox' checked='{ done }' onclick='{ parent.toggle }' /> <label class='{ completed: done }'>{ title }</label>
+      <input type='checkbox' checked='{ selected }' onclick='{ parent.toggle }' /> <label class='{ completed: selected }'>{ title }</label>
     </li>
   </ul>
 
@@ -55,7 +55,7 @@
     var self = this
 
     toggle(e) {
-      e.item.done = !e.item.done
+      e.item.selected = !e.item.selected
       return true
     }
   </script>

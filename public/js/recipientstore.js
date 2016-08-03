@@ -5,8 +5,8 @@ function RecipientStore() {
     _nextID = 3
 
   self.recipients = [
-    { pid:1, title: 'Task 1', done: false },
-    { pid:2, title: 'Task 2', done: false }  
+    { pid:1, title: 'Recipient 1' },
+    { pid:2, title: 'Another recipient' }  
   ];
 
   self.on('recipient_add', function(newR) {
@@ -17,7 +17,7 @@ function RecipientStore() {
 
   self.on('recipient_remove', function() {
     self.recipients = self.recipients.filter(function(item) {
-      return !item.done
+      return !item.selected
     });
     self.trigger('recipients_changed', self.recipients)
   })
