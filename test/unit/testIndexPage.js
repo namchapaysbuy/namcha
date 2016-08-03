@@ -1,3 +1,5 @@
+'use strict'
+
 let index  = require('../../public/javascript/index.js');
 let chai = require('chai')
 let should = chai.should()
