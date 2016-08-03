@@ -8,7 +8,12 @@ process.env.NODE_ENV = env
 config = {
   'default': {
     'site_name': 'Node.JS Basic',
-    'api_version': 'v1'
+    'api_version': 'v1',
+    'email': {
+      'sender_name' : 'email system',
+      'sender_email' : 'namchapaysbuy@gmail.com',
+      'sender_password' : 'namcha1234'
+    }
   },
   'production': {
     'host': {
