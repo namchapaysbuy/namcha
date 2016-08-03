@@ -26,7 +26,12 @@ let validateEmailBody = (emailBody) => {
   return true
 }
 
-// let validateEmailRecipient = (emailBody)
+let validateLength = (maxLength, str) => {
+  if (str.length > maxLength) 
+  { return false }
+  else {return true}
+}
+
 
 let postEmail = (req, res) => {
   const emailTo  = req.body.to
@@ -76,5 +81,6 @@ let postEmail = (req, res) => {
 module.exports = {
   getMainpage,
   validateEmailBody,
-  postEmail
+  postEmail,
+  validateLength
 }
