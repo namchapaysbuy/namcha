@@ -16,21 +16,21 @@ All inputs should be clear after click "Send" button.
      Element Text Should Be     inputTopic     ${EMPTY}
      Element Text Should Be     inputBody     ${EMPTY}
 
-"Send" button should be disabled after only input "inputTo" filled.
-     Open Browser And Maximize Window
-     Input Text    inputTo    namcha@bot.com
-     Element Should Be Disabled    buttonSend
+# "Send" button should be disabled after only input "inputTo" filled.
+#      Open Browser And Maximize Window
+#      Input Text    inputTo    namcha@bot.com
+#      Element Should Be Disabled    buttonSend
 
-"Send" button should be disabled after only input "inputTopic" filled.
-     Open Browser And Maximize Window
-     Input Text    inputTopic    test topic
-     Element Should Be Disabled    buttonSend
+# "Send" button should be disabled after only input "inputTopic" filled.
+#      Open Browser And Maximize Window
+#      Input Text    inputTopic    test topic
+#      Element Should Be Disabled    buttonSend
 
-"Send" button should be disabled after only input "inputBody" filled.
-     Open Browser And Maximize Window
-     Input Text    inputBody    test body
-     Element Should Be Disabled    buttonSend
+# "Send" button should be disabled after only input "inputBody" filled.
+#      Open Browser And Maximize Window
+#      Input Text    inputBody    test body
+#      Element Should Be Disabled    buttonSend
 
-"Send" button should be disabled if all inputs are empty.
-     Open Browser And Maximize Window
-     Element Should Be Disabled    buttonSend
+# "Send" button should be disabled if all inputs are empty.
+#      Open Browser And Maximize Window
+#      Element Should Be Disabled    buttonSend
