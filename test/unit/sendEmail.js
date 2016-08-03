@@ -57,6 +57,26 @@ describe('send email function', function(){
         done()
     } )
 
+    it('should return false when input string grater than max length',function(done){
+        let result = emailController.validateLength(4,'12345')
+        expect(result).eql(false)
+        done()
+    })
+
+    it('shoud return true when input string less than max length', function(done){
+        let result = emailController.validateLength(4,'123')
+        expect(result).eql(true)
+        done()
+    })
+
+
+    it('shoud return true when input string equal than max length', function(done){
+        let result = emailController.validateLength(4,'1234')
+        expect(result).eql(true)
+        done()
+    })
+
+
 
     
     // it('should return 201 and get success message for one email', function(done){
