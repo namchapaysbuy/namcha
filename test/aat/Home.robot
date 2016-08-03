@@ -18,9 +18,9 @@ All inputs should be clear after click "Send" button.
 
 All label should be correct.
      Open Browser And Maximize Window
-     Element Text Should Be     lblInputTo     To:
-     Element Text Should Be     lblInputTopic     Topic:
-     Element Text Should Be     lblInputBody     Body:
+     Element Text Should Be     lblInputTo     To
+     Element Text Should Be     lblInputTopic     Topic
+     Element Text Should Be     lblInputBody     Body
 
 # "Send" button should be disabled after only input "inputTo" filled.
 #      Open Browser And Maximize Window
