@@ -9,12 +9,24 @@ let User  = require('apps/models/user')
 let nodemailer = require('nodemailer')
 let striptags = require('striptags')
 
-
-exports.getMainpage = (req, res) => {
+let getMainpage = (req, res) => {
   res.render('index.ejs', { title: 'oo' })
 }
 
-exports.postEmail = (req, res) => {
+let validateEmailBody = (emailBody) => {
+  if (!emailBody) {
+    return false
+  } else if (!emailBody.to){
+    return false
+  } else if (!emailBody.topic){
+    return false
+  } else if (!emailBody.body){
+    return false
+  }
+  return true
+}
+
+let postEmail = (req, res) => {
   const emailTo  = req.body.to
   const emailTopic = req.body.topic
   const emailBody = req.body.body
@@ -57,7 +69,10 @@ exports.postEmail = (req, res) => {
   //     }
   // }
   // TODO:  return http status
+}
 
-
-
+module.exports = {
+  getMainpage,
+  validateEmailBody,
+  postEmail
 }
