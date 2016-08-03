@@ -175,8 +175,9 @@
 }
 body {
   font-size: 15px;
-  background: #eee;
+  /*background: #eee;*/
 }
+
 
 .bs-example {
     position: relative;
