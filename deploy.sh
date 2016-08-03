@@ -7,4 +7,5 @@ echo "build docker"
 docker build -t namcha:latest .
 
 echo "re-run docker"
-docker rm -f namcha && docker run --restart=always -p 80:3000 -d --name namcha namcha
+docker rm -f namcha
+docker run --restart=always -p 80:3000 -d --name namcha namcha
