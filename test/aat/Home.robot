@@ -40,3 +40,6 @@ All label should be correct.
 "Send" button should be disabled if all inputs are empty.
      Open Browser And Maximize Window
      Element Should Be Disabled    buttonSend
+
+# Add recipient button should be have icon.
+#      ${style}= | Get Element Attribute | id=spIconUser@style
