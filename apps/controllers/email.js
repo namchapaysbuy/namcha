@@ -7,4 +7,9 @@ let User  = require('apps/models/user')
 
 exports.getMainpage = (req, res) => {
   res.render('index.ejs', { title: 'oo' })
+
+}
+
+exports.postEmail = (req, res) => {
+  res.send('send e-mail successful')
 }
