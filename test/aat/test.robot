@@ -7,3 +7,4 @@ Open Browser To Google
     Maximize Browser Window
     Input Text      lst-ib      test
     Press Key       lst-ib      \\13
+    Close Browser
