@@ -11,8 +11,12 @@ npm-debug.log
 *.bak*
 *.rdb
 docker-compose.yml
-Dockerfile
 test/*.test.js*
 test/aat/log.html
 test/aat/output.xml
 test/aat/report.html
+.vscode/
+log.html
+output.xml
+report.html
+selenium-screenshot-*.png
