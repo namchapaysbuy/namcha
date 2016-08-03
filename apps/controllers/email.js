@@ -34,9 +34,28 @@ let validateLength = (maxLength, str) => {
 
 
 let postEmail = (req, res) => {
+
+  if (!validateEmailBody(req.body))
+  {
+      res.status(403).send({
+          code: 403,
+          message: 'Invalid data'
+      })
+      return
+  }
+  
   const emailTo  = req.body.to
   const emailTopic = req.body.topic
   const emailBody = req.body.body
+
+  if (!validateLength(200, emailTopic) && !validateLength(5000, emailBody))
+  {
+      res.status(403).send({
+          code: 403,
+          message: 'Invalid data'
+      })
+      return
+  }
 
   let emails = []
 
