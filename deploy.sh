@@ -1,4 +1,4 @@
-cd /var/jenkins_home/workspace/namcha.dev.unit-test
+# cd /var/jenkins_home/workspace/namcha.dev.unit-test
 
 echo "get code"
 git pull origin master
