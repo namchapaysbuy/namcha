@@ -10,7 +10,7 @@ let nodemailer = require('nodemailer')
 let striptags = require('striptags')
 
 let getMainpage = (req, res) => {
-  res.render('index.ejs', { title: 'oo' })
+  res.render('index.ejs', { title: 'Namcha e-mail' })
 }
 
 let validateEmailBody = (emailBody) => {
