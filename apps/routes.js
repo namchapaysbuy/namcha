@@ -1,16 +1,13 @@
 'use strict'
 
 const router = require('express').Router(),
-      pageController = require('./controllers/page')
+      pageController = require('./controllers/page'),
+      emailController = require('./controllers/email')
 
 /**
  * Routes
  */
-// router.route('/').get(pageController.getMainpage)
-
-router.route('/').get(pageController.getMainpage)
-
-router.route('/me').get(pageController.getMe)
+router.route('/').get(emailController.getMainpage)
 
 /**
  * 404 page notfound.
