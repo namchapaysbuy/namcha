@@ -6,11 +6,12 @@ let request = require('supertest')
 let expect = require('chai').expect
 let helper = require('apps/helpers')
 let emailController = require('apps/controllers/email')
+let app
 
 describe('send email function', function(){
 
     before(function(){
-        let app = require('server')
+        app = require('server')
     })
 
     it('should return false when missing email body on null recipient', function(done){
@@ -76,27 +77,44 @@ describe('send email function', function(){
         done()
     })
 
-
-
     
-    // it('should return 201 and get success message for one email', function(done){
+    it('should return 403 and get error message when invalid content', function(done){
 
-    //     var emailBody = {
-    //         to: 'one@test.com',
-    //         topic: 'test one email',
-    //         body: 'test body for one mail'
-    //     }
+        var emailBody = {
+            to: null,
+            topic: 'test one email',
+            body: 'test body for one mail'
+        }
 
-    //     request(app)
-    //         .post('/api/v1/email')
-    //         .send(emailBody)
-    //         .expect(null, function(req,res){
-    //             expect(res.status).eql(201);
-    //             expect(res.body.code).eql(201);
-    //             expect(res.body.message).eql('Success');
-    //             done();
-    //         })
-    // })
+        request(app)
+            .post('/api/v1/email')
+            .send(emailBody)
+            .expect(null, function(req,res){
+                expect(res.status).eql(403);
+                expect(res.body.code).eql(403);
+                expect(res.body.message).eql('Invalid data');
+                done();
+            })
+    })
+    
+    it('should return 201 and get success message for one email', function(done){
+
+        var emailBody = {
+            to: 'one@test.com',
+            topic: 'test one email',
+            body: 'test body for one mail'
+        }
+
+        request(app)
+            .post('/api/v1/email')
+            .send(emailBody)
+            .expect(null, function(req,res){
+                expect(res.status).eql(201);
+                expect(res.body.code).eql(201);
+                expect(res.body.message).eql('Success');
+                done();
+            })
+    })
 
 })
 
