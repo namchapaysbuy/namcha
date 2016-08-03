@@ -26,6 +26,8 @@ let validateEmailBody = (emailBody) => {
   return true
 }
 
+// let validateEmailRecipient = (emailBody)
+
 let postEmail = (req, res) => {
   const emailTo  = req.body.to
   const emailTopic = req.body.topic
