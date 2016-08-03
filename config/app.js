@@ -7,7 +7,8 @@ process.env.NODE_ENV = env
 
 config = {
   'default': {
-    'site_name': 'Node.JS Basic'
+    'site_name': 'Node.JS Basic',
+    'api_version': 'v1'
   },
   'production': {
     'host': {
