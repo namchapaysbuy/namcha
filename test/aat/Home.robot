@@ -43,3 +43,9 @@ All inputs should be clear after click "Send" button.
      Input Text    inputBody    test body
      Element Should Be Disabled    buttonSend
      Close Browser
+
+"Send" button should be disabled if all inputs are empty.
+     Open Browser    ${URL}
+     Maximize Browser Window 
+     Element Should Be Disabled    buttonSend
+     Close Browser
