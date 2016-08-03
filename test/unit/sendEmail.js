@@ -2,15 +2,15 @@
 
 require('rootpath')()
 
+let request = require('supertest')
+let expect = require('chai').expect
 let helper = require('apps/helpers')
 let emailController = require('apps/controllers/email')
 
 describe('send email function', function(){
 
     before(function(){
-        request = require('supertest')
-        expect = require('chai').expect
-        app = require('server')
+        let app = require('server')
     })
 
     it('should return false when missing email body on null recipient', function(done){
