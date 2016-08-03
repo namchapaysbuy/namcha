@@ -3,7 +3,7 @@ Library           Selenium2Library
 
 *** Test Cases ***               
 Send button should enabled after all required input fields.
-     Open Browser    http://localhost:3000/
+     Open Browser    ${URL}
      Maximize Browser Window 
      Input Text    inputTo    namcha@bot.com
      Input Text    inputTopic    This is a subject automate test
