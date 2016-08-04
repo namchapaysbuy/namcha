@@ -3,10 +3,10 @@ Test Teardown    Close Browser
 Resource          resource.robot
 
 *** Test Cases ***               
-"Send" button should be enabled after all required inputs are not empty.
-     Open Browser And Maximize Window
-     Input All Fields    namcha@bot.com     This is a subject automate test     This is a body automate test.
-     Element Should Be Enabled    buttonSend
+# "Send" button should be enabled after all required inputs are not empty.
+#      Open Browser And Maximize Window
+#      Input All Fields    namcha@bot.com     This is a subject automate test     This is a body automate test.
+#      Element Should Be Enabled    buttonSend
 
 All inputs should be clear after click "Send" button.
      Open Browser And Maximize Window
