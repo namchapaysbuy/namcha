@@ -2,16 +2,11 @@
 
 require('rootpath')()
 
-let config  = require('config/app')
-let helper = require('apps/helpers')
-let mongo = require('config/mongo')
-let User  = require('apps/models/user')
-
-function validateAddRecipient(recipient) {
-  return recipient && recipient.firstName && recipient.lastName && recipient.email ? true : false
-}
-
-exports.validateAddRecipient = validateAddRecipient
+const config  = require('config/app')
+const helper = require('apps/helpers')
+const mongo = require('config/mongo')
+const User  = require('apps/models/user')
+const recipientValidator = require('apps/libs/validator/recipientValidator')
 
 exports.getMainpage = (req, res) => {
   res.render('recipients.ejs', { title: 'Recipients' })
@@ -19,13 +14,14 @@ exports.getMainpage = (req, res) => {
 
 exports.addRecipient = (req, res) => {
   let result = ''
-  if(!validateAddRecipient(req.body)){
+  if(!recipientValidator.validateNewRecipient(req.body)){
     result = {
       code: 403,
       error: 'Incorrect format Ex.firstname, lastname, x@y.com'
     }
   }
   else {
+    
     result = {
       code: 201,
       message: 'Success',
