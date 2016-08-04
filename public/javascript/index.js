@@ -56,3 +56,4 @@ if(typeof exports !== 'undefined') {
     exports.isOverLimitedEmail = isOverLimitedEmail;
     exports.stringEmailListToArray = stringEmailListToArray;
 }
+

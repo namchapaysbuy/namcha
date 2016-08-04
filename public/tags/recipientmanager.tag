@@ -1,35 +1,26 @@
 <recipientmanager>
 
-  <div class="container">
-    <div class="panel panel-default margin-top-20">
-          <div class="panel-heading">
-            <h3>{ opts.title }</h2>
+    <div>
+      <h3>{ opts.title }</h2> 
+      <form class="form-horizontal" onsubmit="{ add }">
+        <div class="form-group">
+          <div class="col-sm-10">
+            <delim_text classname="form-control" name='recipient_info' trim='true'></delim_text>
           </div>
-          <div class="panel-body">
-   
-            <form class="form-horizontal" onsubmit="{ add }">
-              <div class="form-group">
-                <div class="col-sm-10">
-                  <delim_text classname="form-control" name='recipient_info' trim='true'></delim_text>
-                </div>
-                <div class="col-sm-2">
-                  <button disabled="{ !tags.recipient_info.value }" class="btn btn-default pull-right">
-                    <span>Add</span>
-                  </button>
-                </div>
-              </div>
-              <div class="form-group">
-                <div class="col-sm-12">
-                  <recipientlist items='{ items }'></recipientlist>
-                </div>
-              </div>
-            </form>
-
+          <div class="col-sm-2">
+            <button disabled="{ !tags.recipient_info.value }" class="btn btn-default pull-right">
+              <span>Add</span>
+            </button>
           </div>
-
         </div>
+        <div class="form-group">
+          <div class="col-sm-12">
+            <recipientlist items='{ items }'></recipientlist>
+          </div>
+        </div>
+      </form>
+    </div>
 
-  </div>
 
   <!-- ** Maybe add a remove button later? ** -->
   <!--<button disabled='{ !items.length }' onclick='{ remove }'>Remove</button>-->
@@ -55,7 +46,7 @@
       var toAdd = self.tags.recipient_info
       if (toAdd.value) {
         recipients.addRecipientFromArr(toAdd.tokens) // todo - make this return a promise so we can react to success / failure
-        toAdd.value = ''
+        toAdd.value = toAdd.opts.value = ''
         toAdd.focus()
       }
     }
