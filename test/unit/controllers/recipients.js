@@ -72,5 +72,20 @@ describe('recipients controllers', () => {
                 lastName:"Beckham"})
             done()
         })
+
+        it('Should validate fail', done => {
+            const req = {
+                body: {
+                    firstName: 'David'
+                }
+            }
+            const res = {
+                send: () => {}
+            }
+            const spy = res.send = sinon.spy()
+            recipientController.addRecipient(req, res)
+            expect(spy.args[0][0].code).to.equal(403)
+            done()
+        })
     })
 })
