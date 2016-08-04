@@ -49,4 +49,28 @@ describe('recipients controllers', () => {
         })
 
     }) 
+
+    describe('add controller recipients', () => {
+        it('Should add recipients', done => {
+            const req = {
+                body: {
+                    firstName: 'David',
+                    lastName: 'Beckham',
+                    email: 'david.beckham@gmail.com'
+                }
+            }
+            const res = {
+                send: () => {}
+            }
+            const spy = res.send = sinon.spy()
+            recipientController.addRecipient(req, res)
+            expect(spy.args[0][0].code).to.equal(201)
+            expect(spy.args[0][0].message).to.equal('Success')
+            expect(spy.args[0][0].recipient).eql({ 
+                email:"david.beckham@gmail.com",
+                firstName:"David",
+                lastName:"Beckham"})
+            done()
+        })
+    })
 })

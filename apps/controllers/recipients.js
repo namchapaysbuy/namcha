@@ -31,6 +31,6 @@ exports.addRecipient = (req, res) => {
       email: 'david.beckham@gmail.com'
     }
   }
-  res.send(result)
+  return res.send(result)
 }
 
