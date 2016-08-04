@@ -16,4 +16,8 @@ function RecipientsApp() {
 		RiotControl.trigger('recipient_add', recipient)
 	}
 
+	this.focusAddField = (e) => {
+		self.trigger('focus_add_field')
+	}
+
 }

@@ -29,14 +29,15 @@
     var self = this
     var recipents
     self.items = []
+    self.addInProgress = false
 
     self.on('mount', function() {
-      RiotControl.trigger('recipients_init')
       self.tags.recipient_info.on('update', self.update)
       recipients = opts
+      recipients.on('focus_add_field', self.tags.recipient_info.focus)
+      RiotControl.trigger('recipients_init')
     })  
 
-    // Register a listener for store change events.
     RiotControl.on('recipients_changed', function(items) {
       self.items = items
       self.update()
@@ -44,12 +45,18 @@
 
     add(e) {
       var toAdd = self.tags.recipient_info
-      if (toAdd.value) {
-        recipients.addRecipientFromArr(toAdd.tokens) // todo - make this return a promise so we can react to success / failure
-        toAdd.value = toAdd.opts.value = ''
-        toAdd.focus()
+      if (!self.addInProgress && toAdd.value) {
+        self.addInProgress = true
+        recipients.addRecipientFromArr(toAdd.tokens)
       }
-    }
+    }    
+
+    RiotControl.on('recipient_added', function(recipient) {
+      var toAdd = self.tags.recipient_info
+      toAdd.value = toAdd.opts.value = ''
+      toAdd.focus()
+      self.addInProgress = false
+    }) 
 
     remove(e) {
         RiotControl.trigger('recipient_remove')

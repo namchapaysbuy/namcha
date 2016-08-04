@@ -79,10 +79,12 @@
 <script src="/public/javascript/index.js"></script>
 
 <script>
+  // Maybe not the best place for this setup code??
   var recipientStore = new RecipientStore() // Create a store instance.
   RiotControl.addStore(recipientStore) // Register the store in central dispatch.
   var recipientsApp = new RecipientsApp()
   riot.mount('recipientmanager', recipientsApp)
+  $('#recipientsModal').on('shown.bs.modal', recipientsApp.focusAddField)
 </script>
 
 </body>
