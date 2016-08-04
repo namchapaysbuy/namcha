@@ -10,48 +10,68 @@ let expect = chai.expect
 
 describe('index.js', function() {
 
-  it('should return true when object in array is all email', function() {
-    return index.isAllEmail(['pantakan@gmail.com','somboon@gmail.com'])
-    .then(data => {
-        expect(data).to.equal(true)
-    })    
-  })
+  let stringEmaiList = prepareString50EmailList()
+  let arrayEmail = [];
 
-  it('should return true when some object in array is not email', function() {
-    return index.isAllEmail(['pantakan@gmail.com','foo'])
-      .catch(error => {
-        expect(error).to.equal(false)
-      })
-  })
+  function prepareString50EmailList () {
+   let emailList = ''
+    for(let i = 0; i < 50 ; i++){ 
+          emailList += 'pantakan' + i + '@gmail.com,';
+      }
+
+    return emailList.substring(0, emailList.length - 1)
+  }
   
-  it('should return true when email list more than 50', function() {
+  
+  describe('stringEmailListToArray function', function() {
 
-    let emailList = ''
-    for(let i = 0; i <= 51; i++){ 
-        emailList += 'pantakan' + i + '@gmail.com,';
-    }
-    emailList += emailList.substring(emailList.length, emailList.length - 1);
-    emailList = emailList.split(',');
- 
-    return index.isOverLimitedEmail(emailList)
-    .then(data => {   
-      expect(data).to.equal(true)
+    it('should return array when input is seperated by comma', function() {
+     return index.stringEmailListToArray(stringEmaiList)
+     .then(data => {
+       arrayEmail = data.slice()
+       expect(data).to.be.an('array')
+     
+     })  
     })
+
   })
 
-  it('should return false when email list less than 50', function() {
+  describe('isAllEmail function', function() {
 
-    let emailList = ''
-    for(let i = 0; i <= 1; i++){ 
-        emailList += 'pantakan' + i + '@gmail.com,';
-    }
-    emailList += emailList.substring(emailList.length, emailList.length - 1);
-    emailList = emailList.split(',');
- 
-    return index.isOverLimitedEmail(emailList)
-    .catch(error => {   
-      expect(error).to.equal(false)
+    it('should return true when object in array is all email', function() {
+      return index.isAllEmail(['pantakan@gmail.com','somboon@gmail.com'])
+      .then(data => {
+          expect(data).to.equal(true)
+      })    
     })
+
+    it('should return true when some object in array is not email', function() {
+      return index.isAllEmail(['pantakan@gmail.com','foo'])
+        .catch(error => {
+          expect(error).to.equal(false)
+        })
+    })
+
+  })
+
+ describe('isOverLimitedEmail function', function() {
+    
+    it('should return true when email list greater than 50', function() {
+      arrayEmail.push('pantakan51@gmail.com');
+      return index.isOverLimitedEmail(arrayEmail)
+      .then(data => {   
+        expect(data).to.equal(true)
+      })
+    })
+
+    it('should return false when email list less than or equal to 50', function() {
+      arrayEmail.pop();
+      return index.isOverLimitedEmail(arrayEmail)
+      .then(data => {   
+        expect(data).to.equal(false)
+      })
+    })
+   
   })
 
 })
