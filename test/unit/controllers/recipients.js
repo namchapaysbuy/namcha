@@ -8,27 +8,7 @@ const sinon = require('sinon')
 const recipientValidator = require('apps/libs/validator/recipientValidator')
 const recipientController = require('apps/controllers/recipients')
 
-describe('recipients controllers', () => {
-
-    describe('post to email handler', () => {
-        it('call getMainpage', done => {
-            let req = {} ,
-                res = {
-                    render: () => {
-                        return true
-                    }
-                },
-                spy = res.render = sinon.spy()
-
-            recipientController.getMainpage(req, res)
-
-            expect(spy.calledOnce).to.equal(true)
-            expect(spy.args[0][0]).eql('recipients.ejs')
-            expect(spy.args[0][1]).eql({ title: 'Recipients' })
-            done()
-        })
-    })
-
+describe('recipients', () => {
     describe('Recipients validator', () => {
         it('Should recipient validator return true', done => {
             expect(recipientValidator.validateNewRecipient({
@@ -49,8 +29,8 @@ describe('recipients controllers', () => {
         })
     }) 
 
-    describe('Recipient controller api add', () => {
-        it('Should add recipients', done => {
+    describe.skip('Recipient controller api add', () => {
+        it('Should add recipient successfully', done => {
             const req = {
                 body: {
                     firstName: 'David',
