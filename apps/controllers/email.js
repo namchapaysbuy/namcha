@@ -39,7 +39,7 @@ let postEmail = (req, res) => {
   const emailTopic = req.body.topic
   const emailBody = req.body.body
 
-  if (!emailValidator.validTopic(emailTopic) && !validateLength(5000, emailBody)) {
+  if (!emailValidator.validTopic(emailTopic) && !emailValidator.validBody(emailBody)) {
     res.status(403).send({
       code: 403,
       message: 'Invalid data'
