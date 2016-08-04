@@ -2,8 +2,13 @@
 
 require('rootpath')()
 
+let sinon = require('sinon')
+let nodemailer = require('nodemailer')
+let stubTransport = require('nodemailer-stub-transport')
 let request = require('supertest')
+let striptags = require('striptags')
 let expect = require('chai').expect
+let config = require('config/app')
 let helper = require('apps/helpers')
 let emailController = require('apps/controllers/email')
 let app
@@ -59,19 +64,29 @@ describe('test email controller', function(){
             })
         })
         it('should return 200 and get success message for one email', function(done){
-            let emailBody = {
-                to: 'one@test.com',
-                topic: 'test one email',
-                body: 'test body for one mail'
+          let stubTransporter = stubTransport()
+          let transport = nodemailer.createTransport(stubTransport())
+          transport.sendMail({}, function(err, info){
+            return {
+              code: 200,
+              message: 'Success'
             }
-            request(app)
-                .post('/api/v1/email')
-                .send(emailBody)
-                .expect(null, function(req,res){
-                  expect(res.body.code).eql(200)
-                  expect(res.body.message).eql('Success')
-                  done()
-                })
+          })
+          sinon.stub(nodemailer, 'createTransport', () => { return transport })
+          let emailBody = {
+            to: 'one@test.com',
+            topic: 'test one email',
+            body: 'test body for one mail'
+          }
+          request(app)
+              .post('/api/v1/email')
+              .send(emailBody)
+              .expect(null, function(req,res){
+                expect(res.body.code).eql(200)
+                expect(res.body.message).eql('Success')
+                nodemailer.createTransport.restore()
+                done()
+              })
         })
     })
     describe('validate email body', function(){
@@ -81,7 +96,7 @@ describe('test email controller', function(){
                 topic: 'test one email',
                 body: 'test body for one mail'
             }
-            let result = emailController.validateEmailBody(emailBody)
+            let result = emailController.validateEmailForm(emailBody)
             expect(result).eql(false)
             done()
         } )
@@ -91,7 +106,7 @@ describe('test email controller', function(){
                 topic: null,
                 body: 'test body for one mail'
             }
-            let result = emailController.validateEmailBody(emailBody)
+            let result = emailController.validateEmailForm(emailBody)
             expect(result).eql(false)
             done()
         } )
@@ -101,7 +116,7 @@ describe('test email controller', function(){
                 topic: 'test one email',
                 body: null
             }
-            let result = emailController.validateEmailBody(emailBody)
+            let result = emailController.validateEmailForm(emailBody)
             expect(result).eql(false)
             done()
         } )
@@ -111,7 +126,7 @@ describe('test email controller', function(){
                 topic: 'test one email',
                 body: 'test body for one mail'
             }
-            let result = emailController.validateEmailBody(emailBody)
+            let result = emailController.validateEmailForm(emailBody)
             expect(result).eql(true)
             done()
         } )

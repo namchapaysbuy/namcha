@@ -21,3 +21,4 @@ report.html
 selenium-screenshot-*.png
 bower_components
 bower_components/*
+coverage/*
