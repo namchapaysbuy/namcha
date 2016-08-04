@@ -3,11 +3,11 @@
 const is = require('is_js')
 
 let validTopic = (topic) => {
-  return topic.length <= 500
+  return (topic ? topic.length <= 500 : false)
 }
 
 let validBody = (body) => {
-  return body.length <= 5000
+  return (body ? body.length <= 500 : false)
 }
 
 let validRecipient = (recipient) => {
@@ -16,11 +16,13 @@ let validRecipient = (recipient) => {
 
 let getValidRecipient = (recipients) => {
   let result = []
-  recipients = recipients.split(',')
-  for(let i = 0; i < recipients.length; i++){
-    let email = recipients[i].trim()
-    if(validRecipient(email)) {
-      result.push(email)
+  if(recipients){
+    recipients = recipients.split(',')
+    for(let i = 0; i < recipients.length; i++){
+      let email = recipients[i].trim()
+      if(validRecipient(email)) {
+        result.push(email)
+      }
     }
   }
   return result
