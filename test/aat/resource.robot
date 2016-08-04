@@ -9,7 +9,7 @@ Library           Selenium2Library
 *** Variables ***
 # ${SERVER}         ${URL}
 # ${BROWSER}        Firefox
-# ${DELAY}          0
+# ${DELAY}          0.5
 # ${VALID USER}     demo
 # ${VALID PASSWORD}    mode
 # ${LOGIN URL}      http://${SERVER}/
@@ -19,10 +19,11 @@ Library           Selenium2Library
 *** Keywords ***
 Open Browser And Maximize Window
     Open Browser    ${URL}
-    Maximize Browser Window 
+    #Maximize Browser Window 
 
 Input All Fields
     [Arguments]    ${inputToValue}      ${inputTopicValue}      ${inputBodyValue}
     Input Text    inputTo    ${inputToValue}
     Input Text    inputTopic    ${inputTopicValue}
     Input Text    inputBody    ${inputBodyValue}
+    
