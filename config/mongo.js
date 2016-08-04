@@ -5,10 +5,15 @@ const fs = require('fs')
 let config = require('../config/app')
 
 let mongoose = require('mongoose')
+mongoose.Promise = require('bluebird')
 let mongo = mongoose.connect(config.mongodb)
 
 mongoose.connection.on('error', function(error) {
   console.log(colors.red(error))
+})
+
+mongoose.connection.once('connected', () => {
+	console.log("Connected to database")
 })
 
 /**

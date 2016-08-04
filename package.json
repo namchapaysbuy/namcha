@@ -9,6 +9,7 @@
   "author": "Krissada Boontrigratn",
   "license": "ISC",
   "dependencies": {
+    "bluebird": "^3.4.1",
     "body-parser": "^1.14.2",
     "chai": "^3.5.0",
     "colors": "^1.1.2",
