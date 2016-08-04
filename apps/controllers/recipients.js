@@ -6,7 +6,7 @@ const config  = require('config/app')
 const helper = require('apps/helpers')
 const mongo = require('config/mongo')
 const User  = require('apps/models/user')
-const recipientValidator = require('apps/libs/validator/recipientValidator')
+const recipientValidator = require('apps/validators/recipientValidator')
 const Recipient  = require('apps/models/recipient')
 
 exports.addRecipient = (req, res) => {
