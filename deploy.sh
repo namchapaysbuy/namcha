@@ -1,12 +1,6 @@
 echo "get code"
 git pull origin master
 
-# echo "bower install"
-# sudo apt-get install nodejs
-# sudo apt-get install npm
-# sudo npm install -g bower
-# sudo bower install --allow-root
-
 echo "build docker"
 docker build -t namcha:latest .
 
