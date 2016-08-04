@@ -15,12 +15,13 @@
         <div class="panel-body">
  
   <div class="">
-    <form class="form-horizontal">
+    <form class="form-horizontal" >
       <div class="form-group">
         <label for="inputTo" id="lblInputTo" class="col-sm-2 control-label">To</label>
         <label for="inputTo" class="col-sm-1 control-label">:</label>
         <div class="col-sm-8">
-          <input type="email" class="form-control" id="inputTo" name="to" placeholder="To" onkeyup="checkEmptyValue()">
+          <input type="email" class="form-control" id="inputTo" name="to" placeholder="To" onkeyup="checkValidEmailForm()" 
+          data-placement="top" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus.">
         </div>
         <div class="col-sm-1">
           <button type="button" class="btn btn-default" aria-label="Left Align" data-toggle="modal" data-target="#recipientsModal">
@@ -32,22 +33,26 @@
         <label for="inputTopic" id="lblInputTopic"  class="col-sm-2 control-label">Topic</label>
         <label for="inputTopic" class="col-sm-1 control-label">:</label>
         <div class="col-sm-8">
-          <input type="text" class="form-control" id="inputTopic" name="topic" max-lenght="500" placeholder="Topic" onkeyup="checkEmptyValue()">
+          <input type="text" class="form-control" id="inputTopic" name="topic" max-lenght="500" placeholder="Topic" onkeyup="checkValidEmailForm()">
         </div>
       </div>
       <div class="form-group">
         <label for="inputBody" id="lblInputBody" class="col-sm-2 control-label">Body</label>
         <label for="inputBody" class="col-sm-1 control-label">:</label>
         <div class="col-sm-8">
-          <textarea class="form-control" id="inputBody" name="body" rows="12" max-lenght="5000" onkeyup="checkEmptyValue()"></textarea>
+          <textarea class="form-control" id="inputBody" name="body" rows="12" max-lenght="5000" onkeyup="checkValidEmailForm()"></textarea>
         </div>
       </div>
       <div class="form-group">
         <div class="col-sm-offset-2 col-sm-9">
-          <button type="submit" id ="buttonSend" class="btn btn-default pull-right" disabled="disabled">Send</button>
+          <button type="button" id ="buttonSend" class="btn btn-default pull-right" disabled="disabled" onclick="sendClick()">Send</button>
         </div>
       </div>
     </form>
+
+    <button type="button" class="btn btn-default" data-container="body" data-toggle="popover" data-placement="left" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus.">
+  Popover on left
+</button>
   </div>
         </div>
 
@@ -83,6 +88,12 @@
   RiotControl.addStore(recipientStore) // Register the store in central dispatch.
   var recipientsApp = new RecipientsApp()
   riot.mount('recipientmanager', recipientsApp)
+</script>
+
+<script>
+  $(function () {
+    $('[data-toggle="popover"]').popover()
+  })
 </script>
 
 </body>
