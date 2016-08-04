@@ -27,74 +27,69 @@ let validateEmailBody = (emailBody) => {
 }
 
 let validateLength = (maxLength, str) => {
-  if (str.length > maxLength) 
-  { return false }
-  else {return true}
+  return !(str.length > maxLength)
 }
-
 
 let postEmail = (req, res) => {
 
-  if (!validateEmailBody(req.body))
-  {
-      res.status(403).send({
-          code: 403,
-          message: 'Invalid data'
-      })
-      return
+  if (!validateEmailBody(req.body)) {
+    res.status(403).send({
+      code: 403,
+      message: 'Invalid data'
+    })
+    return
   }
-  
+
   const emailTo  = req.body.to
   const emailTopic = req.body.topic
   const emailBody = req.body.body
 
-  if (!validateLength(200, emailTopic) && !validateLength(5000, emailBody))
-  {
-      res.status(403).send({
-          code: 403,
-          message: 'Invalid data'
-      })
-      return
+  if (!validateLength(200, emailTopic) && !validateLength(5000, emailBody)) {
+    res.status(403).send({
+      code: 403,
+      message: 'Invalid data'
+    })
+    return
   }
 
   let emails = []
+  const emailList = emailTo.split(',')
 
-  res.status(201).send({
-    code: 201,
-    message: 'Success'
-  })
+  if(emailList.length > 50){
+    res.status(403).send({
+      code: 403,
+      message: 'Invalid recipient, not over 50 recipients'
+    })
+    return
+  }
 
-  // if (emailTo)
-  // {
-  //     if (emailTo.length > 0)
-  //     {
-  //       let emailList = emailTo.split(",")
-  //       for (let key in emailList) {
-  //         let email = emailList[key]
-  //         if(helper.validateEmail(email)){
-  //           emails.push(email)
-  //         }
-  //       }
-  //       // create reusable transporter object using the default SMTP transport
-  //       let transporter = nodemailer.createTransport(`smtps://${config.email.sender_email}:${config.email.sender_password}@smtp.gmail.com`)
-  //       let mailOptions = {
-  //         from: `${config.email.sender_name} <${config.email.sender_email}>`,
-  //         to: emails.join(', '),
-  //         subject: emailTopic,
-  //         text: striptags(emailBody),
-  //         html: emailBody
-  //       }
-  //       transporter.sendMail(mailOptions, function(error, info){
-  //         if(error){
-  //           res.sendStatus(503)
-  //           res.json(error)
-  //         }
-  //         res.json(mailOptions)
-  //       })
-  //      // TODO:  send email by gmail smtp
-  //     }
-  // }
-  // TODO:  return http status
+  for (let key in emailList) {
+    let email = emailList[key]
+        email = email.trim()
+    if(helper.validateEmail(email)){
+      let transporter = nodemailer.createTransport(`smtps://${config.email.sender_email}:${config.email.sender_password}@smtp.gmail.com`)
+      let mailOptions = {
+        from: `${config.email.sender_name} <${config.email.sender_email}>`,
+        to: email,
+        subject: emailTopic,
+        text: striptags(emailBody),
+        html: emailBody
+      }
+      transporter.sendMail(mailOptions, function(error, info){
+        if(error){
+          res.status(503).send({
+            code: 503,
+            error
+          })
+          return
+        }
+        res.status(200).send({
+          code: 200,
+          message: 'Success'
+        })
+      })
+    }
+  }
 }
 
 module.exports = {
