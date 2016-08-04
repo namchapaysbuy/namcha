@@ -6,10 +6,11 @@ checkEmptyValue = function () {
 
   if (inputTo && inputTopic && inputBody)
   {
-    isAllEmail(inputTo)
+    var _email = inputTo.split(',')
+    isAllEmail(_email)
     .then(result => { 
       if (result){ 
-         return isOverLimitedEmail(inputTo)
+         return isOverLimitedEmail(_email)
       } 
     })
     .then(result => {
@@ -22,6 +23,7 @@ checkEmptyValue = function () {
       }
     })
     .catch(error => {
+      $('#buttonSend').attr('disabled','disabled')
       console.error('error: ', error)
     })
     // $('#buttonSend').removeAttr('disabled')
@@ -32,12 +34,11 @@ checkEmptyValue = function () {
 
 function isOverLimitedEmail (email) {  
   return new Promise((resolve, reject) => {     
-    var _email = email.split(',')
-    console.log('_email is ', _email)
-      if(_email.lenght <= 50 ){      
+    //console.log('_email is ', email.length)
+      if(email.length > 50 ){  
         resolve(true)
       } else {       
-        resolve(false)
+        reject(false)
       }    
   })
 }
@@ -47,7 +48,7 @@ function isAllEmail (email) {
     if(is.all.email(email)){    
       resolve(true)
     } else {      
-      resolve(false)
+      reject(false)
     }
   })  
 }
