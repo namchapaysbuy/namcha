@@ -1,15 +1,18 @@
 'use strict'
 
 require('rootpath')()
-let emailValidator = require('apps/validators/email')
-let expect = require('chai').expect
-let stubValidFormEmail = {
+const emailValidator = require('apps/validators/email')
+const expect = require('chai').expect
+const stubValidFormEmail = {
   topic: 'topic',
-  body: 'body'
+  body: 'body',
+  to: 'abc@abc.com'
 }
-let stubInvalidFormEmail = {
+const stubInvalidFormEmail = {
   topic: stubValidFormEmail.topic.repeat(500),
-  body: stubValidFormEmail.body.repeat(5000)
+  body: stubValidFormEmail.body.repeat(5000),
+  to: stubValidFormEmail.to.replace('@', ''),
+  multipleTo: 'abc@abc1.com, abcabc2.com, abc@abc3com'
 }
 
 describe('test email validator', () => {
@@ -38,6 +41,27 @@ describe('test email validator', () => {
     const result = emailValidator.validBody(stubInvalidFormEmail.body)
 
     expect(result).eql(false)
+    done()
+  })
+
+  it('should return true, when email recipient is valid', (done) => {
+    const result = emailValidator.validRecipient(stubValidFormEmail.to)
+
+    expect(result).eql(true)
+    done()
+  })
+
+  it('should return false, when email recipient is invalid', (done) => {
+    const result = emailValidator.validRecipient(stubInvalidFormEmail.to)
+
+    expect(result).eql(false)
+    done()
+  })
+
+  it('should return list that contains only valid recipient\'s email', (done) => {
+    const result = emailValidator.getValidRecipient(stubInvalidFormEmail.multipleTo)
+
+    expect(result).to.have.lengthOf(1)
     done()
   })
 })
