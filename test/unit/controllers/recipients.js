@@ -8,7 +8,7 @@ const sinon = require('sinon')
 const recipientValidator = require('apps/libs/validator/recipientValidator')
 const recipientController = require('apps/controllers/recipients')
 
-describe('recipients controllers', () => {
+describe('recipients', () => {
     describe('Recipients validator', () => {
         it('Should recipient validator return true', done => {
             expect(recipientValidator.validateNewRecipient({
@@ -29,7 +29,7 @@ describe('recipients controllers', () => {
         })
     }) 
 
-    describe('Recipient controller api add', () => {
+    describe.skip('Recipient controller api add', () => {
         it('Should add recipient successfully', done => {
             const req = {
                 body: {
