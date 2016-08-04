@@ -5,8 +5,7 @@ checkEmptyValue = function () {
   var inputBody = $('#inputBody').val()
 
   if (inputTo && inputTopic && inputBody)
-  {
-    var _email = inputTo.split(',')
+  {    
     isAllEmail(_email)
     .then(result => { 
       if (result){ 
@@ -14,17 +13,14 @@ checkEmptyValue = function () {
       } 
     })
     .then(result => {
-      if(result){
-        console.log('isOverLimitedEmail')
+      if(result){ 
         $('#buttonSend').attr('disabled','disabled')
       } else {
-        console.log('isNotOverLimitedEmail')
         $('#buttonSend').removeAttr('disabled')
       }
     })
     .catch(error => {
       $('#buttonSend').attr('disabled','disabled')
-      console.error('error: ', error)
     })
     // $('#buttonSend').removeAttr('disabled')
   } else {
@@ -32,14 +28,15 @@ checkEmptyValue = function () {
   }
 }
 
+function stringEmailListToArray (inputTo) {
+  return new Promise((resolve, reject) => {
+    resolve(inputTo.split(','))
+  })
+}
+
 function isOverLimitedEmail (email) {  
   return new Promise((resolve, reject) => {     
-    //console.log('_email is ', email.length)
-      if(email.length > 50 ){  
-        resolve(true)
-      } else {       
-        reject(false)
-      }    
+    resolve(email.length > 50)        
   })
 }
 
@@ -48,7 +45,7 @@ function isAllEmail (email) {
     if(is.all.email(email)){    
       resolve(true)
     } else {      
-      reject(false)
+      resolve(false)
     }
   })  
 }
@@ -57,4 +54,5 @@ if(typeof exports !== 'undefined') {
     global.is = require('is_js');
     exports.isAllEmail = isAllEmail;
     exports.isOverLimitedEmail = isOverLimitedEmail;
+    exports.stringEmailListToArray = stringEmailListToArray;
 }
