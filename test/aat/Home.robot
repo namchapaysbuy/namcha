@@ -47,7 +47,7 @@ All label should be correct.
      Element Should Be Enabled    buttonSend
      Click Element    buttonSend
      ${popOverText}=    Get Text    xpath=//div[@class='popover-content']
-     Should Be Equal As Strings    ${popOverText}     Vivamus sagittis lacus vel augue laoreet rutrum faucibusx.
+     Should Be Equal As Strings    ${popOverText}     Vivamus sagittis lacus vel augue laoreet rutrum faucibus.
 
 # Add recipient button should be have icon.
 #      ${style}= | Get Element Attribute | id=spIconUser@style
