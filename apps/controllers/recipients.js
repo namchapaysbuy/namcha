@@ -27,7 +27,7 @@ exports.addRecipient = (req, res) => {
   if(!validateAddRecipient(req.body)){
     result = {
       code: 403,
-      error: 'Incorrect format Ex.firstname, lastname, '
+      error: 'Incorrect format Ex.firstname, lastname, x@y.com'
     }
   }
   else {

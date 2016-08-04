@@ -85,6 +85,7 @@ describe('recipients controllers', () => {
             const spy = res.send = sinon.spy()
             recipientController.addRecipient(req, res)
             expect(spy.args[0][0].code).to.equal(403)
+            expect(spy.args[0][0].error).to.equal('Incorrect format Ex.firstname, lastname, x@y.com')
             done()
         })
     })
