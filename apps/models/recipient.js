@@ -9,7 +9,7 @@ let recipientSchema = new Schema({
         required: true
     },
     lastname: {
-        type: String,
+        type: String
     },
     email: {
         type: String,
