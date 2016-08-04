@@ -4,7 +4,6 @@ require('rootpath')()
 
 let request = require('supertest')
 let expect = require('chai').expect
-let mongo = require('config/mongo')
 let Recipient  = require('apps/models/recipient')
 
 describe.skip('test recipient db', function(){
