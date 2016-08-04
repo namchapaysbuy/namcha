@@ -26,30 +26,19 @@ describe('index.js', function() {
   describe('stringEmailListToArray function', function() {
 
     it('should return array when input is seperated by comma', function() {
-     return index.stringEmailListToArray(stringEmaiList)
-     .then(data => {
-       arrayEmail = data.slice()
-       expect(data).to.be.an('array')
-     
+       expect(index.stringEmailListToArray(stringEmaiList)).to.be.an('array')
      })  
-    })
-
+    
   })
 
-  describe('isAllEmail function', function() {
+  describe('validateAllEmailFormat function', function() {
 
     it('should return true when object in array is all email', function() {
-      return index.isAllEmail(['pantakan@gmail.com','somboon@gmail.com'])
-      .then(data => {
-          expect(data).to.equal(true)
-      })    
+      expect(index.validateAllEmailFormat(['pantakan@gmail.com','somboon@gmail.com'])).to.equal(true)  
     })
 
     it('should return true when some object in array is not email', function() {
-      return index.isAllEmail(['pantakan@gmail.com','foo'])
-        .catch(error => {
-          expect(error).to.equal(false)
-        })
+       expect(index.validateAllEmailFormat(['pantakan@gmail.com','foo'])).to.equal(false)
     })
 
   })
@@ -57,19 +46,17 @@ describe('index.js', function() {
  describe('isOverLimitedEmail function', function() {
     
     it('should return true when email list greater than 50', function() {
-      arrayEmail.push('pantakan51@gmail.com');
-      return index.isOverLimitedEmail(arrayEmail)
-      .then(data => {   
-        expect(data).to.equal(true)
-      })
+
+      let arrayEmail50 = index.stringEmailListToArray(stringEmaiList)      
+      arrayEmail50.push('pantakan51@gmail.com')
+      expect(index.isOverLimitedEmail(arrayEmail50)).to.equal(true)
+
     })
 
     it('should return false when email list less than or equal to 50', function() {
-      arrayEmail.pop();
-      return index.isOverLimitedEmail(arrayEmail)
-      .then(data => {   
-        expect(data).to.equal(false)
-      })
+      let arrayEmail50 = index.stringEmailListToArray(stringEmaiList)      
+      expect(index.isOverLimitedEmail(arrayEmail50.pop())).to.equal(false)
+      
     })
    
   })
