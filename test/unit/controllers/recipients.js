@@ -5,7 +5,7 @@ require('rootpath')()
 const request = require('supertest')
 const expect = require('chai').expect
 const sinon = require('sinon')
-const recipientValidator = require('apps/libs/validator/recipientValidator')
+const recipientValidator = require('apps/validators/recipientValidator')
 const recipientController = require('apps/controllers/recipients')
 let app
 
@@ -34,20 +34,4 @@ describe('recipients', () => {
             done()
         })
     }) 
-
-    describe('Recipient controller api add', () => {
-        it('Should add recipient success', done => {
-            const recipientInformation = {
-                firstName: "pitsamai",
-                lastName: "saeher",
-                email: "pitsamai@paysbuy.com"
-            }
-            request(app)
-                .post('/api/recipients')
-                .send(recipientInformation)
-                .expect(req, res) => 
-        })
-
-       
-    })
 })
