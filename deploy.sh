@@ -5,7 +5,7 @@ echo "bower install"
 sudo apt-get install nodejs
 sudo apt-get install npm
 sudo npm install -g bower
-bower install --allow-root
+sudo bower install --allow-root
 
 echo "build docker"
 docker build -t namcha:latest .
