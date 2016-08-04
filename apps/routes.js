@@ -15,6 +15,7 @@ router.route('/').get(emailController.getMainpage)
 router.route(`/api/${config.api_version}/email`).post(emailController.postEmail)
 
 router.route('/recipients').get(recipientsController.getMainpage)
+router.route('/api/recipients').post(recipientsController.addRecipient)
 
 /**
  * 404 page notfound.
