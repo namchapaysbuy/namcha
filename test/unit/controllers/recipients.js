@@ -4,10 +4,12 @@ require('rootpath')()
 
 const request = require('supertest')
 const expect = require('chai').expect
-const recipientController = require('apps/controllers/recipients')
 const sinon = require('sinon')
+const recipientValidator = require('apps/libs/validator/recipientValidator')
+const recipientController = require('apps/controllers/recipients')
 
 describe('recipients controllers', () => {
+
     describe('post to email handler', () => {
         it('call getMainpage', done => {
             let req = {} ,
@@ -16,22 +18,20 @@ describe('recipients controllers', () => {
                         return true
                     }
                 },
-                spy = undefined
+                spy = res.render = sinon.spy()
 
-            spy = res.render = sinon.spy()
             recipientController.getMainpage(req, res)
+
             expect(spy.calledOnce).to.equal(true)
-            const ejsTarget = spy.args[0][0]
-            const ejsParam = spy.args[0][1]
-            expect(ejsTarget).eql('recipients.ejs')
-            expect(ejsParam).eql({ title: 'Recipients' })
+            expect(spy.args[0][0]).eql('recipients.ejs')
+            expect(spy.args[0][1]).eql({ title: 'Recipients' })
             done()
         })
     })
 
     describe('add validare recipients', () => {
         it('Should valid true', done => {
-            expect(recipientController.validateAddRecipient({
+            expect(recipientValidator.validateNewRecipient({
                 firstName: 'David',
                 lastName: 'Beckham',
                 email: 'david.beckham@gmail.com'
@@ -40,11 +40,11 @@ describe('recipients controllers', () => {
         })
 
         it('Should valid false', done => {
-            expect(recipientController.validateAddRecipient({
+            expect(recipientValidator.validateNewRecipient({
                 firstName: 'David',
                 lastName: 'Beckham'
             })).to.be.false
-            expect(recipientController.validateAddRecipient()).to.be.false
+            expect(recipientValidator.validateNewRecipient()).to.be.false
             done()
         })
 
