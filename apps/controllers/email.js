@@ -61,6 +61,12 @@ let postEmail = (req, res) => {
       message: 'Invalid recipient, not over 50 recipients'
     })
     return
+  } else if (emailList.length < 1){
+    res.status(403).send({
+      code: 403,
+      message: 'Invalid recipient, need minimum 1 recipient'
+    })
+    return
   }
 
   for (let key in emailList) {
