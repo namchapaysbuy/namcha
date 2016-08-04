@@ -96,7 +96,7 @@ describe('test email controller', function(){
                 topic: 'test one email',
                 body: 'test body for one mail'
             }
-            let result = emailController.validateEmailBody(emailBody)
+            let result = emailController.validateEmailForm(emailBody)
             expect(result).eql(false)
             done()
         } )
@@ -106,7 +106,7 @@ describe('test email controller', function(){
                 topic: null,
                 body: 'test body for one mail'
             }
-            let result = emailController.validateEmailBody(emailBody)
+            let result = emailController.validateEmailForm(emailBody)
             expect(result).eql(false)
             done()
         } )
@@ -116,7 +116,7 @@ describe('test email controller', function(){
                 topic: 'test one email',
                 body: null
             }
-            let result = emailController.validateEmailBody(emailBody)
+            let result = emailController.validateEmailForm(emailBody)
             expect(result).eql(false)
             done()
         } )
@@ -126,7 +126,7 @@ describe('test email controller', function(){
                 topic: 'test one email',
                 body: 'test body for one mail'
             }
-            let result = emailController.validateEmailBody(emailBody)
+            let result = emailController.validateEmailForm(emailBody)
             expect(result).eql(true)
             done()
         } )

@@ -8,19 +8,14 @@ let mongo = require('config/mongo')
 let User  = require('apps/models/user')
 let nodemailer = require('nodemailer')
 let striptags = require('striptags')
+let emailValidator = require('apps/validators/email')
 
 let getMainpage = (req, res) => {
   res.render('index.ejs', { title: 'Namcha e-mail' })
 }
 
-let validateEmailBody = (emailBody) => {
-  if (!emailBody) {
-    return false
-  } else if (!emailBody.to){
-    return false
-  } else if (!emailBody.topic){
-    return false
-  } else if (!emailBody.body){
+let validateEmailForm = (emailBody) => {
+  if (!emailBody || !emailBody.to || !emailBody.topic || !emailBody.body) {
     return false
   }
   return true
@@ -32,7 +27,7 @@ let validateLength = (maxLength, str) => {
 
 let postEmail = (req, res) => {
 
-  if (!validateEmailBody(req.body)) {
+  if (!validateEmailForm(req.body)) {
     res.status(403).send({
       code: 403,
       message: 'Invalid data'
@@ -44,7 +39,7 @@ let postEmail = (req, res) => {
   const emailTopic = req.body.topic
   const emailBody = req.body.body
 
-  if (!validateLength(200, emailTopic) && !validateLength(5000, emailBody)) {
+  if (!emailValidator.validTopic(emailTopic) && !emailValidator.validBody(emailBody)) {
     res.status(403).send({
       code: 403,
       message: 'Invalid data'
@@ -100,7 +95,7 @@ let postEmail = (req, res) => {
 
 module.exports = {
   getMainpage,
-  validateEmailBody,
+  validateEmailForm,
   postEmail,
   validateLength
 }
