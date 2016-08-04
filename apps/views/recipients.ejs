@@ -8,13 +8,12 @@
 </head>
 <body>
 
-Testing RiotJS for recipient manager
-
-
-<recipientmanager></recipientmanager>
+<recipientmanager title="Recipients"></recipientmanager>
 
 <script type="riot/tag" src="/public/tags/recipientmanager.tag"></script>
+<script type="riot/tag" src="/public/tags/delim_text.tag"></script>
 
+<script src="/public/js/recipients_app.js"></script>
 <script src="/public/js/recipientstore.js"></script>
 
 <script src="/bower_components/riotjs/riot+compiler.min.js"></script>
@@ -22,9 +21,13 @@ Testing RiotJS for recipient manager
 <script src="/bower_components/jquery/dist/jquery.min.js"></script>
 <script src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <script>
+
 	var recipientStore = new RecipientStore() // Create a store instance.
 	RiotControl.addStore(recipientStore) // Register the store in central dispatch.
-	riot.mount('recipientmanager')
+
+  var recipientsApp = new RecipientsApp()
+	riot.mount('recipientmanager', recipientsApp)
+
 </script>
 
 </body>

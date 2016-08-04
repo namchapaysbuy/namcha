@@ -57,7 +57,7 @@ let compile = function(str, path) {
 }
 
 
-mime.define({'text/plain' : ['tag']})
+mime.define({'riot/tag' : ['tag']})
 
 app.use(
   stylus.middleware({
