@@ -7,8 +7,14 @@ const expect = require('chai').expect
 const sinon = require('sinon')
 const recipientValidator = require('apps/libs/validator/recipientValidator')
 const recipientController = require('apps/controllers/recipients')
+let app
 
 describe('recipients', () => {
+
+    before(() => {
+        app = require('server')
+    })
+
     describe('Recipients validator', () => {
         it('Should recipient validator return true', done => {
             expect(recipientValidator.validateNewRecipient({
@@ -29,47 +35,19 @@ describe('recipients', () => {
         })
     }) 
 
-    describe.skip('Recipient controller api add', () => {
-        it('Should add recipient successfully', done => {
-            const req = {
-                body: {
-                    firstName: 'David',
-                    lastName: 'Beckham',
-                    email: 'david.beckham@gmail.com'
-                }
+    describe('Recipient controller api add', () => {
+        it('Should add recipient success', done => {
+            const recipientInformation = {
+                firstName: "pitsamai",
+                lastName: "saeher",
+                email: "pitsamai@paysbuy.com"
             }
-            const res = {
-                send: () => {}
-            }
-            const spy = res.send = sinon.spy()
-
-            recipientController.addRecipient(req, res)
-
-            expect(spy.args[0][0].code).to.equal(201)
-            expect(spy.args[0][0].message).to.equal('Success')
-            expect(spy.args[0][0].recipient).eql({ 
-                email:"david.beckham@gmail.com",
-                firstName:"David",
-                lastName:"Beckham"})
-            done()
+            request(app)
+                .post('/api/recipients')
+                .send(recipientInformation)
+                .expect(req, res) => 
         })
 
-        it('Should validate fail of add recipient', done => {
-            const req = {
-                body: {
-                    firstName: 'David'
-                }
-            }
-            const res = {
-                send: () => {}
-            }
-            const spy = res.send = sinon.spy()
-
-            recipientController.addRecipient(req, res)
-            
-            expect(spy.args[0][0].code).to.equal(403)
-            expect(spy.args[0][0].error).to.equal('Incorrect format Ex.firstname, lastname, x@y.com')
-            done()
-        })
+       
     })
 })
