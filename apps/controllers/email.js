@@ -2,13 +2,13 @@
 
 require('rootpath')()
 
-let config  = require('config/app')
-let helper = require('apps/helpers')
-let mongo = require('config/mongo')
-let User  = require('apps/models/user')
-let nodemailer = require('nodemailer')
-let striptags = require('striptags')
-let emailValidator = require('apps/validators/email')
+const config  = require('config/app')
+const helper = require('apps/helpers')
+const mongo = require('config/mongo')
+const User  = require('apps/models/user')
+const nodemailer = require('nodemailer')
+const striptags = require('striptags')
+const emailValidator = require('apps/validators/email')
 
 let getMainpage = (req, res) => {
   res.render('index.ejs', { title: 'Namcha e-mail' })
