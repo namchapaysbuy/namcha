@@ -57,8 +57,3 @@ if(typeof exports !== 'undefined') {
     exports.stringEmailListToArray = stringEmailListToArray;
 }
 
-var recipientStore = new RecipientStore() // Create a store instance.
-RiotControl.addStore(recipientStore) // Register the store in central dispatch.
-
-var recipientsApp = new RecipientsApp()
-riot.mount('recipientmanager', recipientsApp)

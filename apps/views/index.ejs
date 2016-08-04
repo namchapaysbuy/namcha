@@ -57,7 +57,7 @@
 
 <!-- Modal -->
 <div class="modal fade" id="recipientsModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog" role="document">
+  <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-body">
         <recipientmanager title="Recipients"></recipientmanager>
@@ -77,6 +77,13 @@
 <script src="/public/js/recipients_app.js"></script>
 <script src="/public/js/recipientstore.js"></script>
 <script src="/public/javascript/index.js"></script>
+
+<script>
+  var recipientStore = new RecipientStore() // Create a store instance.
+  RiotControl.addStore(recipientStore) // Register the store in central dispatch.
+  var recipientsApp = new RecipientsApp()
+  riot.mount('recipientmanager', recipientsApp)
+</script>
 
 </body>
 </html>
