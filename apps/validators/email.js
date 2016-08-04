@@ -1,24 +1,34 @@
 'use strict'
 
-module.exports = {
-  validTopic: (topic) => {
-    return topic.length <= 500
-  },
-  validBody: (body) => {
-    return body.length <= 5000
+const is = require('is_js')
+
+let validTopic = (topic) => {
+  return topic.length <= 500
+}
+
+let validBody = (body) => {
+  return body.length <= 5000
+}
+
+let validRecipient = (recipient) => {
+  return is.email(recipient)
+}
+
+let getValidRecipient = (recipients) => {
+  let result = []
+  recipients = recipients.split(',')
+  for(let i = 0; i < recipients.length; i++){
+    let email = recipients[i].trim()
+    if(validRecipient(email)) {
+      result.push(email)
+    }
   }
-  // format: (email) => {
-  //   let re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-  //   return re.test(email)
-  // },
-  // length: (maxLength, string) => {
-  //   return !(str.length > maxLength)
-  // },
-  // fields: (fields, required) => {
-  //   if(typeof fields == 'object'){
-  //
-  //   } else {
-  //
-  //   }
-  // }
+  return result
+}
+
+module.exports = {
+  validTopic,
+  validBody,
+  validRecipient,
+  getValidRecipient
 }
