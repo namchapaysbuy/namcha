@@ -18,11 +18,6 @@ exports.getMainpage = (req, res) => {
 }
 
 exports.addRecipient = (req, res) => {
-    // req.body = {
-  //   firstName: 'David',
-  //   lastName: 'Beckham',
-  //   email: 'david.beckham@gmail.com'
-  // }
   let result = ''
   if(!validateAddRecipient(req.body)){
     result = {
