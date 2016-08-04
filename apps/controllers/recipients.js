@@ -7,6 +7,7 @@ const helper = require('apps/helpers')
 const mongo = require('config/mongo')
 const User  = require('apps/models/user')
 const recipientValidator = require('apps/libs/validator/recipientValidator')
+// const recipientModels = require('apps/models/')
 
 exports.getMainpage = (req, res) => {
   res.render('recipients.ejs', { title: 'Recipients' })
@@ -21,7 +22,7 @@ exports.addRecipient = (req, res) => {
     }
   }
   else {
-    
+    // recipientModels.
     result = {
       code: 201,
       message: 'Success',

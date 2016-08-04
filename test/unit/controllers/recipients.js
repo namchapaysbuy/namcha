@@ -29,8 +29,8 @@ describe('recipients controllers', () => {
         })
     })
 
-    describe('add validare recipients', () => {
-        it('Should valid true', done => {
+    describe('Recipients validator', () => {
+        it('Should recipient validator return true', done => {
             expect(recipientValidator.validateNewRecipient({
                 firstName: 'David',
                 lastName: 'Beckham',
@@ -39,7 +39,7 @@ describe('recipients controllers', () => {
             done()
         })
 
-        it('Should valid false', done => {
+        it('Should recipient validate return false', done => {
             expect(recipientValidator.validateNewRecipient({
                 firstName: 'David',
                 lastName: 'Beckham'
@@ -47,10 +47,9 @@ describe('recipients controllers', () => {
             expect(recipientValidator.validateNewRecipient()).to.be.false
             done()
         })
-
     }) 
 
-    describe('add controller recipients', () => {
+    describe('Recipient controller api add', () => {
         it('Should add recipients', done => {
             const req = {
                 body: {
@@ -63,7 +62,9 @@ describe('recipients controllers', () => {
                 send: () => {}
             }
             const spy = res.send = sinon.spy()
+
             recipientController.addRecipient(req, res)
+
             expect(spy.args[0][0].code).to.equal(201)
             expect(spy.args[0][0].message).to.equal('Success')
             expect(spy.args[0][0].recipient).eql({ 
@@ -73,7 +74,7 @@ describe('recipients controllers', () => {
             done()
         })
 
-        it('Should validate fail', done => {
+        it('Should validate fail of add recipient', done => {
             const req = {
                 body: {
                     firstName: 'David'
@@ -83,7 +84,9 @@ describe('recipients controllers', () => {
                 send: () => {}
             }
             const spy = res.send = sinon.spy()
+
             recipientController.addRecipient(req, res)
+            
             expect(spy.args[0][0].code).to.equal(403)
             expect(spy.args[0][0].error).to.equal('Incorrect format Ex.firstname, lastname, x@y.com')
             done()
