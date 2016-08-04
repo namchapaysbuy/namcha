@@ -2,100 +2,45 @@
 
 require('rootpath')()
 
-const config  = require('config/app')
-const helper = require('apps/helpers')
-const mongo = require('config/mongo')
-const User  = require('apps/models/user')
-const nodemailer = require('nodemailer')
-const striptags = require('striptags')
 const emailValidator = require('apps/validators/email')
+const emailService = require('apps/services/email')
+let emailBody
 
 let getMainpage = (req, res) => {
   res.render('index.ejs', { title: 'Namcha e-mail' })
 }
 
-let validateEmailForm = (emailBody) => {
-  if (!emailBody || !emailBody.to || !emailBody.topic || !emailBody.body) {
-    return false
-  }
-  return true
-}
-
-let validateLength = (maxLength, str) => {
-  return !(str.length > maxLength)
-}
-
 let postEmail = (req, res) => {
 
-  if (!validateEmailForm(req.body)) {
-    res.status(403).send({
-      code: 403,
-      message: 'Invalid data'
-    })
-    return
+  emailBody = req.body
+  if(!_isValidRequest(emailBody)) {
+    return _response(res, 403, 'Request is invalid')
   }
 
-  const emailTo  = req.body.to
-  const emailTopic = req.body.topic
-  const emailBody = req.body.body
-
-  if (!emailValidator.validTopic(emailTopic) && !emailValidator.validBody(emailBody)) {
-    res.status(403).send({
-      code: 403,
-      message: 'Invalid data'
-    })
-    return
+  const recipients = emailValidator.getValidRecipient(emailBody.to)
+  if(!recipients.length) {
+    return _response(res, 403, 'Recipients is invalid')
   }
 
-  let emails = []
-  const emailList = emailTo.split(',')
-
-  if(emailList.length > 50){
-    res.status(403).send({
-      code: 403,
-      message: 'Invalid recipient, not over 50 recipients'
-    })
-    return
-  } else if (emailList.length < 1){
-    res.status(403).send({
-      code: 403,
-      message: 'Invalid recipient, need minimum 1 recipient'
-    })
-    return
+  const result = emailService.send(recipients, emailBody.topic, emailBody.body)
+  if(!result.status) {
+    return _response(res, 503, 'Cannot send email')
   }
+  return _response(res, 200, 'Success')
+}
 
-  for (let key in emailList) {
-    let email = emailList[key]
-        email = email.trim()
-    if(helper.validateEmail(email)){
-      let transporter = nodemailer.createTransport(`smtps://${config.email.sender_email}:${config.email.sender_password}@smtp.gmail.com`)
-      let mailOptions = {
-        from: `${config.email.sender_name} <${config.email.sender_email}>`,
-        to: email,
-        subject: emailTopic,
-        text: striptags(emailBody),
-        html: emailBody
-      }
-      transporter.sendMail(mailOptions, function(error, info){
-        if(error){
-          res.status(503).send({
-            code: 503,
-            error
-          })
-          return
-        }
-        res.status(200).send({
-          code: 200,
-          message: 'Success'
-        })
-      })
-    }
-  }
+let _isValidRequest = (topic, body, recipients) => {
+  return (emailValidator.validTopic(emailBody.topic) && emailValidator.validBody(emailBody.body) && emailValidator.getValidRecipient(emailBody.to).length)
+}
+
+let _response = (res, code, message) => {
+  return res.status(code).send({
+    code,
+    message
+  })
 }
 
 module.exports = {
-  getMainpage,
-  validateEmailForm,
   postEmail,
-  validateLength
+  getMainpage
 }
