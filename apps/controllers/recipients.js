@@ -9,10 +9,6 @@ const User  = require('apps/models/user')
 const recipientValidator = require('apps/libs/validator/recipientValidator')
 // const recipientModels = require('apps/models/')
 
-exports.getMainpage = (req, res) => {
-  res.render('recipients.ejs', { title: 'Recipients' })
-}
-
 exports.addRecipient = (req, res) => {
   let result = ''
   if(!recipientValidator.validateNewRecipient(req.body)){
