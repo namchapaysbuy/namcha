@@ -2,14 +2,16 @@
 
 require('rootpath')()
 
+const is = require('is_js')
 const recipientValidator = require('apps/validators/recipientValidator')
-const emailValidator = require('apps/validators/emailValidator')
 const Recipient  = require('apps/models/recipient')
 
 const ERROR_MESSAGE = 'Incorrect format Ex.firstname, lastname, x@y.com'
 
 exports.addRecipient = (req, res) => {
-  if(!recipientValidator.validateNewRecipient(req.body)) res.send({ code: 403, error: ERROR_MESSAGE })
+  if(!recipientValidator.validateNewRecipient(req.body) || !is.email(req.body.email)) {
+    res.send({ code: 403, error: ERROR_MESSAGE })
+  }
 
   const recipientData = {
     firstname: req.body.firstName,
