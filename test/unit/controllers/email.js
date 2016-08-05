@@ -3,18 +3,13 @@
 require('rootpath')()
 
 const sinon = require('sinon')
-const nodemailer = require('nodemailer')
-const stubTransport = require('nodemailer-stub-transport')
 const request = require('supertest')
-const striptags = require('striptags')
 const expect = require('chai').expect
-const config = require('config/app')
-const helper = require('apps/helpers')
 const emailController = require('apps/controllers/email')
 const emailValidator = require('apps/validators/email')
 const emailService = require('apps/services/email')
 let app
-const emailBody = {
+let emailBody = {
   to: 'one@test.com',
   topic: 'test one email',
   body: 'test body for one mail'
@@ -48,7 +43,7 @@ describe('test email controller', () => {
       })
     })
 
-    it('should return 503, when cannot send email', (done) => {
+    it('should return 503, when email cannot send', (done) => {
       sinon.stub(emailService, 'send', () => {
         return {
           status: false,
@@ -63,6 +58,52 @@ describe('test email controller', () => {
         expect(res.body.code).eql(503)
 
         emailService.send.restore()
+        done()
+      })
+    })
+
+    it('should return 403, when recipient is invalid', (done) => {
+      delete emailBody.to
+      const response = request(app)
+                        .post('/api/v1/email')
+                        .send(emailBody)
+
+      response.expect(null, function(req, res){
+        expect(res.body.code).eql(403)
+        done()
+      })
+    })
+
+    it('should return 403, when topic is invalid', (done) => {
+      delete emailBody.topic
+      const response = request(app)
+                        .post('/api/v1/email')
+                        .send(emailBody)
+
+      response.expect(null, function(req, res){
+        expect(res.body.code).eql(403)
+        done()
+      })
+    })
+
+    it('should return 403, when body is invalid', (done) => {
+      delete emailBody.body
+      const response = request(app)
+                        .post('/api/v1/email')
+                        .send(emailBody)
+
+      response.expect(null, function(req, res){
+        expect(res.body.code).eql(403)
+        done()
+      })
+    })
+
+    it('should return 403, when email request is invalid', (done) => {
+      const response = request(app)
+                        .post('/api/v1/email')
+
+      response.expect(null, function(req, res){
+        expect(res.body.code).eql(403)
         done()
       })
     })
