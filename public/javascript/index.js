@@ -23,7 +23,7 @@ function sendClick() {
     $.ajax({
       method: 'POST',
       url: sendEmailUrl,
-      data: { 'to' : $('#inputTo').val() , 'topic' :  $('#inputTopic').val() , 'body' : CKEDITOR.instances['inputBody'].getData() },
+      data: { 'to' : $('#inputTo').val() , 'topic' :  $('#inputTopic').val() , 'body' : $('#inputBody').val() },
       success: function(result){
        console.log(result);
       }
