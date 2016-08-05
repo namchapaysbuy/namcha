@@ -27,7 +27,8 @@ describe('Recipients controllers', () => {
 
             }
         }
-        const spy = res.send = sinon.spy()
+        const spySend = res.send = sinon.spy()
+        const spyStatus = res.status = sinon.spy()
         const expectedResult = {
             firstname: "David",
             lastname: "Beckham",
@@ -38,12 +39,14 @@ describe('Recipients controllers', () => {
         recipientController.addRecipient(req, res)
 
         // assert
-        const result = spy.args[0][0]
-        expect(spy.calledOnce).to.be.true
-        // expect(result.status).eql(201)
-        expect(result.code).eql(201)
-        expect(result.message).eql('Success')
-        expect(result.recipient).eql(expectedResult)
+        const resultSend = spySend.args[0][0]
+        const resultStatus = spyStatus.args[0][0]
+        expect(spySend.calledOnce).to.be.true
+        expect(spyStatus.calledOnce).to.be.true
+        expect(resultStatus).eql(201)
+        expect(resultSend.code).eql(201)
+        expect(resultSend.message).eql('Success')
+        expect(resultSend.recipient).eql(expectedResult)
         done()
     })
 })
