@@ -17,13 +17,30 @@ Library           Selenium2Library
 # ${ERROR URL}      http://${SERVER}/error.html
 
 *** Keywords ***
-Open Browser And Maximize Window
+Open Email App
     Open Browser    ${URL}
+    Title Should Be    Namcha e-mail
     #Maximize Browser Window 
 
-Input All Fields
-    [Arguments]    ${inputToValue}      ${inputTopicValue}      ${inputBodyValue}
+Fill Email Recipients
+    [Arguments]     ${inputToValue} 
     Input Text    inputTo    ${inputToValue}
-    Input Text    inputTopic    ${inputTopicValue}
+
+Fill Email Topic
+    [Arguments]     ${inputToValue} 
+    Input Text    inputTopic    ${inputToValue}
+
+Fill Email Body
+    [Arguments]     ${inputBodyValue}
     Input Text    inputBody    ${inputBodyValue}
+
+Not Allow To Send Email
+    Element Should Be Disabled    buttonSend
+
+Send Email
+    Click Element      buttonSend
     
+Send Successfully
+    Element Text Should Be     inputTo     ${EMPTY}
+    Element Text Should Be     inputTopic     ${EMPTY}
+    Element Text Should Be     inputBody     ${EMPTY}
