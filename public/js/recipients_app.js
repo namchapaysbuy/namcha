@@ -6,8 +6,8 @@ function RecipientsApp() {
 
 	this.addRecipientFromArr = (arr) => {
 		self.addRecipient({
-			firstName: arr[0],
-			lastName: arr[1],
+			firstname: arr[0],
+			lastname: arr[1],
 			email: arr[2]
 		})
 	}

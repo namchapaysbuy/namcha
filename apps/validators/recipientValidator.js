@@ -3,5 +3,5 @@
 require('rootpath')()
 
 exports.validateNewRecipient = recipient => {
-  return recipient && recipient.firstName && recipient.lastName && recipient.email ? true : false
+  return recipient && recipient.firstname && recipient.lastname && recipient.email ? true : false
 }

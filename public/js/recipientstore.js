@@ -7,10 +7,10 @@ function RecipientStore() {
   var self = this
 
   self.recipients = [
-    { firstName: 'Fred', lastName: 'Bloggs', email:'fred@acme.com' },
-    { firstName: 'John', lastName: 'Doe', email:'j.doe@acme.com' },
-    { firstName: 'Another', lastName: 'Person', email:'address@email.com' },
-    { firstName: 'One', lastName: 'More', email:'addressmore123@email.com' }
+    { firstname: 'Fred', lastname: 'Bloggs', email:'fred@acme.com' },
+    { firstname: 'John', lastname: 'Doe', email:'j.doe@acme.com' },
+    { firstname: 'Another', lastname: 'Person', email:'address@email.com' },
+    { firstname: 'One', lastname: 'More', email:'addressmore123@email.com' }
   ];
 
   self.on('recipient_add', function(newRecipient) {
@@ -36,7 +36,7 @@ function RecipientStore() {
   })
 
   function sort(desc = false) {
-    self.recipients.sort( (a,b) => (a.firstName.toLowerCase() > b.firstName.toLowerCase()) ? desc ? -1 : 1 : 0 )
+    self.recipients.sort( (a,b) => (a.firstname.toLowerCase() > b.firstname.toLowerCase()) ? desc ? -1 : 1 : 0 )
   }
 
 }

@@ -10,8 +10,8 @@ describe('Recipients validator', () => {
 
     it('Should return true if recipient is valid', done => {
         recipient = {
-            firstName: 'David',
-            lastName: 'Beckham',
+            firstname: 'David',
+            lastname: 'Beckham',
             email: 'david.beckham@gmail.com'
         }
 
@@ -21,8 +21,8 @@ describe('Recipients validator', () => {
 
     it('Should return false if recipient is invalid', done => {
         recipient = {
-            firstName: 'David',
-            lastName: 'Beckham'
+            firstname: 'David',
+            lastname: 'Beckham'
         }
         expect(recipientValidator.validateNewRecipient(recipient)).to.be.false
 
