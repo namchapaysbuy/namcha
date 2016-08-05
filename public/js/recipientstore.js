@@ -15,7 +15,7 @@ function RecipientStore() {
 
   self.on('recipient_add', function(newRecipient) {
     self.recipients.push(newRecipient)
-    self.trigger('recipient_added', newRecipient)        
+    self.trigger('recipient_added', newRecipient)
     self.trigger('recipients_changed', self.recipients)        
   })
 

@@ -23,7 +23,6 @@
 
 
   <!-- ** Maybe add a remove button later? ** -->
-  <!--<button disabled='{ !items.length }' onclick='{ remove }'>Remove</button>-->
 
   <script>
     var self = this
@@ -57,10 +56,6 @@
       toAdd.focus()
       self.addInProgress = false
     }) 
-
-    remove(e) {
-        RiotControl.trigger('recipient_remove')
-    }
 
   </script>
 
