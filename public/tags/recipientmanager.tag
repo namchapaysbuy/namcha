@@ -1,25 +1,25 @@
 <recipientmanager>
 
-    <div>
-      <h3>{ opts.title }</h2> 
-      <form class="form-horizontal" onsubmit="{ add }">
-        <div class="form-group">
-          <div class="col-sm-10">
-            <delim_text classname="form-control" name='recipient_info' trim='true'></delim_text>
-          </div>
-          <div class="col-sm-2">
-            <button disabled="{ !tags.recipient_info.value }" class="btn btn-default pull-right">
-              <span>Add</span>
-            </button>
-          </div>
+  <div>
+    <h3>{ opts.title }</h2> 
+    <form class="form-horizontal" onsubmit="{ add }">
+      <div class="form-group">
+        <div class="col-sm-10">
+          <delim_text classname="form-control" name='recipient_info' trim='true'></delim_text>
         </div>
-        <div class="form-group">
-          <div class="col-sm-12">
-            <recipientlist items='{ items }'></recipientlist>
-          </div>
+        <div class="col-sm-2">
+          <button disabled="{ !tags.recipient_info.value }" class="btn btn-default pull-right">
+            <span>Add</span>
+          </button>
         </div>
-      </form>
-    </div>
+      </div>
+      <div class="form-group">
+        <div class="col-sm-12">
+          <recipientlist items='{ items }'></recipientlist>
+        </div>
+      </div>
+    </form>
+  </div>
 
   <script>
     var self = this

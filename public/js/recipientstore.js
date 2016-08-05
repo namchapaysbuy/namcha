@@ -36,8 +36,8 @@ function RecipientStore(api) {
     sort()
   })
 
-  function sort(desc = false) {
-    self.recipients.sort( (a,b) => (a.firstname.toLowerCase() > b.firstname.toLowerCase()) ? desc ? -1 : 1 : 0 )
+  function sort(col = 'firstname', desc = false) {
+    self.recipients.sort( (a,b) => (a[col].toLowerCase() > b[col].toLowerCase()) ? desc ? -1 : 1 : 0 )
   }
 
 }
