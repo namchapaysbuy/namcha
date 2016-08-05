@@ -7,7 +7,7 @@ let validTopic = (topic) => {
 }
 
 let validBody = (body) => {
-  return (body ? body.length <= 500 : false)
+  return (body ? body.length <= 5000 : false)
 }
 
 let validRecipient = (recipient) => {

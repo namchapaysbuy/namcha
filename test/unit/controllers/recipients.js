@@ -5,7 +5,6 @@ require('rootpath')()
 const request = require('supertest')
 const expect = require('chai').expect
 const sinon = require('sinon')
-const recipientValidator = require('apps/validators/recipientValidator')
 const recipientController = require('apps/controllers/recipients')
 const config = require('config/app')
 
@@ -23,28 +22,45 @@ describe('Recipients controllers', () => {
         app = require('server')
     })
 
-    it('Should add Recipients if params is valid', done => {
+    it('Should add Recipients successfully if params is valid', done => {
         // arrange
         const req = {
             body: {
+                firstname: "david",
+                lastname: "beckham",
+                email: "DAVID.beckham@gmail.com"
+            }
+        }
+        
+        const res = {
+            _self: this,
+            send: () => {
+                
+            },
+            status: () => {
 
             }
         }
-        const resNested = {
-            send: () => {},
-            status: () => {}
+        const spySend = res.send = sinon.spy()
+        const spyStatus = res.status = sinon.spy()
+        const expectedResult = {
+            firstname: "David",
+            lastname: "Beckham",
+            email: "david.beckham@gmail.com"
         }
-        const res = {
-            send: () => {},
-            status: () => resNested
-        }
-        let spy = resNested.send = sinon.spy()
 
         // act
         recipientController.addRecipient(req, res)
 
         // assert
-        expect(spy.calledOnce).to.be.true
+        const resultSend = spySend.args[0][0]
+        const resultStatus = spyStatus.args[0][0]
+        expect(spySend.calledOnce).to.be.true
+        expect(spyStatus.calledOnce).to.be.true
+        expect(resultStatus).eql(201)
+        expect(resultSend.code).eql(201)
+        expect(resultSend.message).eql('Success')
+        expect(resultSend.recipient).eql(expectedResult)
         done()
     })
 

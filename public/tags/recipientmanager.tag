@@ -74,8 +74,8 @@
     </thead>
     <tbody>
       <tr each='{ opts.items }'>
-        <td><a class="attrib-toggle">{ firstName }</a></td>
-        <td>{ lastName }</td>
+        <td><a class="attrib-toggle">{ firstname }</a></td>
+        <td>{ lastname }</td>
         <td>{ email }</td>
       </tr>
     </tbody>
