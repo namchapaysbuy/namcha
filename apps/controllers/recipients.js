@@ -20,9 +20,7 @@ let recipientList = [
 exports.addRecipient = (req, res) => {
   if (!recipientValidator.validateNewRecipient(req.body)) return false
 
-  const recipient = recipientFormatter.validRecipientFormat(req.body)
-  // const recipientModel = recipientModelFactory(recipient.firstname, recipient.lastname, recipient.email)
-  
+  const recipient = recipientFormatter.validRecipientFormat(req.body)  
 
   res.status(201)
   return res.send({ code: 201, message: 'Success', recipient })
