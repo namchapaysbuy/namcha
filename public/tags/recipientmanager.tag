@@ -1,3 +1,4 @@
+<!-- Recipient Manager interface -->
 <recipientmanager>
 
   <div>
@@ -8,7 +9,7 @@
           <delim_text classname="form-control" name='recipient_info' trim='true'></delim_text>
         </div>
         <div class="col-sm-2">
-          <button disabled="{ !tags.recipient_info.value }" class="btn btn-default pull-right">
+          <button disabled="{ !tags.recipient_info.value || addInProgress }" class="btn btn-default pull-right">
             <span>Add</span>
           </button>
         </div>
@@ -64,7 +65,7 @@
 </recipientmanager>
 
 
-
+<!-- Recipient List Table -->
 <recipientlist>
   <table class="table table-condensed">
     <thead>

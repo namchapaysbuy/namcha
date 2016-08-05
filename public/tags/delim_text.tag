@@ -1,7 +1,7 @@
 <!-- Delimited text field -->
 <delim_text>
 
-  <input class="{ opts.classname }" value="{ opts.value }" onkeyup="{upd}"/>
+  <input class="{ opts.classname }" value="{ opts.value }" onkeyup="{ upd }"/>
 
   <script>
     var self = this
