@@ -18,7 +18,6 @@ router.use(function (req, res, next) {
 })
 
 router.get('/', function (req, res, next) {
-  console.log('This is a middleware then get homepage')
   next()
 })
 
