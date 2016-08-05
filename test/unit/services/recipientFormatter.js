@@ -4,13 +4,17 @@ require('rootpath')()
 
 const recipientFormatter = require('apps/services/recipientFormatter')
 const expect = require('chai').expect
-const stubValidInputRecipient = {
-    firstname: 'Pitshy',
-    lastname: 'Khonngam',
-    email: 'pitsamai@paysbuy.com'
-}
-
+let stubValidInputRecipient = undefined
 describe('test recipient formatter',() => {
+    
+    beforeEach(() => {
+        return stubValidInputRecipient = {
+            firstname: 'Pitshy',
+            lastname: 'Khonngam',
+            email: 'pitsamai@paysbuy.com'
+        }
+    })
+
     it('should return valid when add valid recipient format', done => {
         const result = recipientFormatter.validRecipientFormat(stubValidInputRecipient)
         expect(result).eql(stubValidInputRecipient)
@@ -29,4 +33,17 @@ describe('test recipient formatter',() => {
         })
         done()
     })
+
+    it('should return valid when add invalid recipient as some charater is uppercase', done => {
+        stubValidInputRecipient.firstname = "pITshy"
+        const result = recipientFormatter.validRecipientFormat(stubValidInputRecipient)
+        expect(result).eql({
+            firstname: 'Pitshy',
+            lastname: 'Khonngam',
+            email: 'pitsamai@paysbuy.com'
+        })
+        done()
+
+    })
+
 })
