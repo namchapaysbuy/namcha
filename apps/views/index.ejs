@@ -20,7 +20,7 @@
         <label for="inputTo" id="lblInputTo" class="col-sm-2 control-label">To</label>
         <label for="inputTo" class="col-sm-1 control-label">:</label>
         <div class="col-sm-8">
-          <input type="email" class="form-control" id="inputTo" name="to" placeholder="To" onkeyup="checkValidEmailForm()" 
+          <input type="email" class="form-control" id="inputTo" name="to" placeholder="To" onkeyup="checkValidEmailForm()"
           data-placement="top" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus.">
         </div>
         <div class="col-sm-1">
@@ -79,9 +79,11 @@
 <script src="/bower_components/jquery/dist/jquery.min.js"></script>
 <script src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <script src="/bower_components/is_js/is.min.js"></script>
+<script src="/bower_components/ckeditor/ckeditor.js"></script>
 <script src="/public/js/recipients_app.js"></script>
 <script src="/public/js/recipientstore.js"></script>
 <script src="/public/javascript/index.js"></script>
+<script src="/public/javascript/ckeditor_config.js"></script>
 
 <script>
   // Maybe not the best place for this setup code??
@@ -94,6 +96,7 @@
 
 <script>
   $(function () {
+    // Get data from CKeditor by CKEDITOR.instances['inputBody'].getData()
     $('[data-toggle="popover"]').popover()
   })
 </script>

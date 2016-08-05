@@ -30,9 +30,9 @@ exports.addRecipient = (req, res) => {
 
 exports.getRecipient = (req, res) => {
 
-  recipientList.push({req})
+  recipientList.push(req.body)
   
-  _response(res, 200, { code: 200, message: 'Success', recipientList: '' })
+  return res.send({ code: 200, message: 'Success', recipientList })
 }
 
 function _response(res, code, message) {
