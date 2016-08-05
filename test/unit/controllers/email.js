@@ -3,13 +3,8 @@
 require('rootpath')()
 
 const sinon = require('sinon')
-const nodemailer = require('nodemailer')
-const stubTransport = require('nodemailer-stub-transport')
 const request = require('supertest')
-const striptags = require('striptags')
 const expect = require('chai').expect
-const config = require('config/app')
-const helper = require('apps/helpers')
 const emailController = require('apps/controllers/email')
 const emailValidator = require('apps/validators/email')
 const emailService = require('apps/services/email')
