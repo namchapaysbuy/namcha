@@ -5,16 +5,28 @@ require('rootpath')()
 const recipientFormatter = require('apps/services/recipientFormatter')
 const expect = require('chai').expect
 const stubValidInputRecipient = {
-    // firstname: 'Pitshy',
-    firstname: 'P',
+    firstname: 'Pitshy',
     lastname: 'Khonngam',
     email: 'pitsamai@paysbuy.com'
 }
 
-describe.skip('test recipient formatter',() => {
-    it('should return true if valid add recipient format', done => {
+describe('test recipient formatter',() => {
+    it('should return valid when add valid recipient format', done => {
         const result = recipientFormatter.validRecipientFormat(stubValidInputRecipient)
         expect(result).eql(stubValidInputRecipient)
+        done()
+    })
+
+    it('should return valid when add invalid recipient format', done => {
+        stubValidInputRecipient.firstname = "p"
+        stubValidInputRecipient.lastname = 'kho'
+        stubValidInputRecipient.email = 'PiTSAmai@Paysbuy.com'
+        const result = recipientFormatter.validRecipientFormat(stubValidInputRecipient)
+        expect(result).eql({
+            firstname: 'P',
+            lastname: 'Kho',
+            email: 'pitsamai@paysbuy.com'
+        })
         done()
     })
 })
