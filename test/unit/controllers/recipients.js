@@ -7,7 +7,6 @@ const expect = require('chai').expect
 const sinon = require('sinon')
 const recipientController = require('apps/controllers/recipients')
 const config = require('config/app')
-
 let app
 const stubValidInputRecipient = {
     firstname: 'Pitshy',
@@ -15,6 +14,7 @@ const stubValidInputRecipient = {
     email: 'pitsamai@paysbuy.com'
 }
 const recipientRoute = `/api/${config.api_version}/recipients`
+const recipientModelFactory  = require('apps/factories/recipientModelFactory')
 
 describe('Recipients controllers', () => {
 
@@ -33,13 +33,8 @@ describe('Recipients controllers', () => {
         }
         
         const res = {
-            _self: this,
-            send: () => {
-                
-            },
-            status: () => {
-
-            }
+            send: () => {},
+            status: () => {}
         }
         const spySend = res.send = sinon.spy()
         const spyStatus = res.status = sinon.spy()
@@ -48,6 +43,9 @@ describe('Recipients controllers', () => {
             lastname: "Beckham",
             email: "david.beckham@gmail.com"
         }
+        sinon.stub(recipientModelFactory, 'getRecipientModel', () => {
+            return { save: () => {} }
+        })
 
         // act
         recipientController.addRecipient(req, res)

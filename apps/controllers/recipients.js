@@ -5,7 +5,7 @@ require('rootpath')()
 const is = require('is_js')
 const recipientValidator = require('apps/validators/recipientValidator')
 const recipientFormatter = require('apps/services/recipientFormatter')
-const Recipient  = require('apps/models/recipient')
+const recipientModelFactory  = require('apps/factories/recipientModelFactory')
 
 const ERROR_MESSAGE = 'Incorrect format Ex.firstname, lastname, x@y.com'
 
@@ -31,9 +31,9 @@ exports.addRecipient = (req, res) => {
 
 exports.getRecipient = (req, res) => {
 
-  recipientList.push({req})
+  recipientList.push(req.body)
   
-  _response(res, 200, { code: 200, message: 'Success', recipientList: '' })
+  return res.send({ code: 200, message: 'Success', recipientList })
 }
 
 function _response(res, code, message) {
