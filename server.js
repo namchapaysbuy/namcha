@@ -73,6 +73,8 @@ app.use(
   routes
 )
 
+require('config/mongo')
+
 http.createServer(app).listen(app.get('port'), function(){
   console.log(colors.green(`application is started: ${config.host.self}`))
 })
