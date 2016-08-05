@@ -1,6 +1,7 @@
 function RecipientAPI() {
 
-	var URL = '/api/v1/recipients'
+	const URL = '/api/v1/recipients'
+	const CODE_SUCCESS = 201
 
 	this.add = (recipient) => {
 		return $.post(URL, recipient).then(addComplete)
@@ -8,7 +9,7 @@ function RecipientAPI() {
 
 	var addComplete = (result) => {
 		var recip
-		if (result.code == 201) {
+		if (result.code == CODE_SUCCESS) {
 			recip = result.recipient
 		} else {
 			recip = false
