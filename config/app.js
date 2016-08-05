@@ -20,14 +20,14 @@ config = {
       'port': 3000,
       'self': process.env.SELF_URL || 'http://localhost.com/'
     },
-    'mongodb': process.env.MONGO_URI || process.env.MONGOLAB_URI || 'mongodb://127.0.0.1:27018/namcha'
+    'mongodb': process.env.MONGO_URI || process.env.MONGOLAB_URI || 'mongodb://127.0.0.1:27017/namcha'
   },
   'development': {
     'host': {
       'port': 3000,
       'self': 'http://localhost:3000' || (`http://localhost:${process.env.PORT}`)
     },
-    'mongodb': process.env.MONGO_URI || process.env.MONGOLAB_URI || 'mongodb://127.0.0.1:27018/namcha'
+    'mongodb': process.env.MONGO_URI || process.env.MONGOLAB_URI || 'mongodb://127.0.0.1:27017/namcha'
   }
 }
 module.exports = Object.assign(config['default'], config[env])

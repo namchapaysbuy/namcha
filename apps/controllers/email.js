@@ -23,7 +23,7 @@ let postEmail = (req, res) => {
   }
 
   const result = emailService.send(recipients, emailBody.topic, emailBody.body)
-  if(!result.status) {
+  if(result && !result.status) {
     return _response(res, 503, 'Cannot send email')
   }
   return _response(res, 200, 'Success')
