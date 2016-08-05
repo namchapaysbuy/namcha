@@ -2,8 +2,8 @@
 
 const validRecipientFormat = recipient => {
     const formatter = {
-        firstname:  capitalizeFirstLetter(recipient.firstname),
-        lastname: capitalizeFirstLetter(recipient.lastname),
+        firstname:  capitalizeFirstLetter(recipient.firstname.toLowerCase()),
+        lastname: capitalizeFirstLetter(recipient.lastname.toLowerCase()),
         email: recipient.email.toLowerCase()    
         } 
     return formatter
