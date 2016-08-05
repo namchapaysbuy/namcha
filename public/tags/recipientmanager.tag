@@ -21,23 +21,20 @@
       </form>
     </div>
 
-
-  <!-- ** Maybe add a remove button later? ** -->
-
   <script>
     var self = this
     var recipents
     self.items = []
     self.addInProgress = false
 
-    self.on('mount', function() {
+    self.on('mount', () => {
       self.tags.recipient_info.on('update', self.update)
       recipients = opts
       recipients.on('focus_add_field', self.tags.recipient_info.focus)
       RiotControl.trigger('recipients_init')
     })  
 
-    RiotControl.on('recipients_changed', function(items) {
+    RiotControl.on('recipients_changed', (items) => {
       self.items = items
       self.update()
     }) 
@@ -50,8 +47,7 @@
       }
     }    
 
-    RiotControl.on('recipient_added', function(recipient) {
-      console.log(recipient)
+    RiotControl.on('recipient_added', (recipient) => {
       var toAdd = self.tags.recipient_info
       if (recipient) {
         toAdd.value = ''
