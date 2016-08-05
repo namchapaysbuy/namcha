@@ -13,18 +13,18 @@
       if (self.value != opts.value) opts.value = self.value
     })
 
-    upd(e) {
+    upd = (e) => {
       self.value = e.target.value
-      self.tokens =  self.getTokens(self.value)
+      self.tokens = getTokens(self.value)
       self.trigger('update')
       return true
     }
 
-    focus() {
+    self.focus = () => {
      $('input', self.root).focus()
     }
 
-    getTokens() {
+    getTokens = () => {
       var tokens = self.value.split(self.delim)
       return self.trim ? tokens.map((x)=>x.trim()) : tokens
     }

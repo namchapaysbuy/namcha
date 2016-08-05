@@ -6,7 +6,7 @@
     <form class="form-horizontal" onsubmit="{ add }">
       <div class="form-group">
         <div class="col-sm-10">
-          <delim_text classname="form-control" name='recipient_info' trim='true'></delim_text>
+          <delim_text classname="form-control" name="recipient_info" trim="true"></delim_text>
         </div>
         <div class="col-sm-2">
           <button disabled="{ !tags.recipient_info.value || addInProgress }" class="btn btn-default pull-right">
@@ -40,7 +40,7 @@
       self.update()
     }) 
 
-    add(e) {
+    add = (e) => {
       var toAdd = self.tags.recipient_info
       if (!self.addInProgress && toAdd.value) {
         self.addInProgress = true
