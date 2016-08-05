@@ -1,8 +1,6 @@
-function RecipientStore() {
+function RecipientStore(api) {
 
   riot.observable(this) // Riot provides our event emitter.
-
-  // TEMPORARY code until code to work with API is written
   
   var self = this
 
@@ -14,9 +12,13 @@ function RecipientStore() {
   ];
 
   self.on('recipient_add', function(newRecipient) {
-    self.recipients.push(newRecipient)
-    self.trigger('recipient_added', newRecipient)
-    self.trigger('recipients_changed', self.recipients)        
+    api.add(newRecipient).then((addedRecipient) => {
+      if (addedRecipient) {
+        self.recipients.push(addedRecipient)
+        self.trigger('recipients_changed', self.recipients)
+      }
+      self.trigger('recipient_added', addedRecipient)       
+    })
   })
 
   self.on('recipient_remove', function() {
@@ -32,7 +34,6 @@ function RecipientStore() {
 
   self.on('recipients_changed', ()=>{
     sort()
-    console.log(self.recipients)
   })
 
   function sort(desc = false) {

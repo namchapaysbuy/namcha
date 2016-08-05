@@ -26,7 +26,7 @@
 
     getTokens() {
       var tokens = self.value.split(self.delim)
-      return self.trim ? tokens.map(String.trim) : tokens
+      return self.trim ? tokens.map((x)=>x.trim()) : tokens
     }
   </script>
 

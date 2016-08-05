@@ -19,12 +19,14 @@ let recipientList = [
 
 exports.addRecipient = (req, res) => {
   if (!recipientValidator.validateNewRecipient(req.body)) {
-    return false
+    // fix this (status)
+    res.status(200)
+    return res.send({ code: 999, message: 'Error' })
   }
 
-  const recipient = recipientFormatter.validRecipientFormat(req.body)
+  const newRecipient = recipientFormatter.validRecipientFormat(req.body)
   res.status(201)
-  return res.send({ code: 201, message: 'Success', recipient })
+  return res.send({ code: 201, message: 'Success', recipient: newRecipient })
 }
 
 exports.getRecipient = (req, res) => {

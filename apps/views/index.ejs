@@ -81,11 +81,12 @@
 <script src="/bower_components/is_js/is.min.js"></script>
 <script src="/public/js/recipients_app.js"></script>
 <script src="/public/js/recipientstore.js"></script>
+<script src="/public/js/recipient_api.js"></script>
 <script src="/public/javascript/index.js"></script>
 
 <script>
   // Maybe not the best place for this setup code??
-  var recipientStore = new RecipientStore() // Create a store instance.
+  var recipientStore = new RecipientStore(new RecipientAPI()) // Create a store instance.
   RiotControl.addStore(recipientStore) // Register the store in central dispatch.
   var recipientsApp = new RecipientsApp()
   riot.mount('recipientmanager', recipientsApp)

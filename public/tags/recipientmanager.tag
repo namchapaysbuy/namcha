@@ -51,8 +51,14 @@
     }    
 
     RiotControl.on('recipient_added', function(recipient) {
+      console.log(recipient)
       var toAdd = self.tags.recipient_info
-      toAdd.value = toAdd.opts.value = ''
+      if (recipient) {
+        toAdd.value = ''
+        toAdd.update()
+      } else {
+        alert('Add failed')
+      }
       toAdd.focus()
       self.addInProgress = false
     }) 
