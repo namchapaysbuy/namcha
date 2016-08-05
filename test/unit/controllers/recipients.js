@@ -10,11 +10,6 @@ const recipientController = require('apps/controllers/recipients')
 let app
 
 describe('recipients', () => {
-
-    before(() => {
-        app = require('server')
-    })
-
     describe('Recipients validator', () => {
         it('Should recipient validator return true', done => {
             expect(recipientValidator.validateNewRecipient({
