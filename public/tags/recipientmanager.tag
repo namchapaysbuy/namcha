@@ -30,8 +30,8 @@
 
     self.on('mount', () => {
       self.tags.recipient_info.on('update', self.update)
-      recipients = opts
-      recipients.on('focus_add_field', self.tags.recipient_info.focus)
+      recipientsApp = opts
+      recipientsApp.on('focus_add_field', self.tags.recipient_info.focus)
       RiotControl.trigger('recipients_init')
     })  
 
@@ -44,7 +44,7 @@
       var toAdd = self.tags.recipient_info
       if (!self.addInProgress && toAdd.value) {
         self.addInProgress = true
-        recipients.addRecipientFromArr(toAdd.tokens)
+        recipientsApp.addRecipientFromArr(toAdd.tokens)
       }
     }    
 
