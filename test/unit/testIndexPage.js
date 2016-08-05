@@ -21,12 +21,21 @@ describe('index.js', function() {
 
     return emailList.substring(0, emailList.length - 1)
   }
+
+  function prepareString500character () {
+   let text = ''
+    for(let i = 0; i < 500 ; i++){ 
+    	text += 'a';
+    }
+
+    return text
+  }
   
   
   describe('stringEmailListToArray function', function() {
 
     it('should return array when input is seperated by comma', function() {
-       expect(index.stringEmailListToArray(stringEmaiList)).to.be.an('array')
+       expect(index.stringEmailListToArray(stringEmaiList)).to.be.an('array');
      })  
     
   })
@@ -34,11 +43,11 @@ describe('index.js', function() {
   describe('validateAllEmailFormat function', function() {
 
     it('should return true when object in array is all email', function() {
-      expect(index.validateAllEmailFormat(['pantakan@gmail.com','somboon@gmail.com'])).to.equal(true)  
+      expect(index.checkAllRecipientIsValid(['pantakan@gmail.com','somboon@gmail.com'])).to.equal(true)
     })
 
     it('should return true when some object in array is not email', function() {
-       expect(index.validateAllEmailFormat(['pantakan@gmail.com','foo'])).to.equal(false)
+       expect(index.checkAllRecipientIsValid(['pantakan@gmail.com','foo'])).to.equal(false)
     })
 
   })
@@ -56,6 +65,22 @@ describe('index.js', function() {
     it('should return false when email list less than or equal to 50', function() {
       let arrayEmail50 = index.stringEmailListToArray(stringEmaiList)      
       expect(index.isOverLimitedEmail(arrayEmail50.pop())).to.equal(false)
+      
+    })
+   
+  })
+
+   describe('isOver500Character function', function() {
+    
+    it('should return true when topic characters greater than 50', function() {
+      let text = prepareString500character()
+      expect(index.isOver500Character(text + 'a')).to.equal(true)
+
+    })
+
+    it('should return false when topic characters less than or equal to 50', function() {
+      let text = prepareString500character()
+      expect(index.isOver500Character(text)).to.equal(false)
       
     })
    

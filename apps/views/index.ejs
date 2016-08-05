@@ -15,13 +15,13 @@
         <div class="panel-body">
  
   <div class="">
-    <form class="form-horizontal" >
+    <form id="formEmail" class="form-horizontal" >
       <div class="form-group">
         <label for="inputTo" id="lblInputTo" class="col-sm-2 control-label">To</label>
         <label for="inputTo" class="col-sm-1 control-label">:</label>
         <div class="col-sm-8">
-          <input type="email" class="form-control" id="inputTo" name="to" placeholder="To" onkeyup="checkValidEmailForm()"
-          data-placement="top" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus.">
+          <input type="email" class="form-control" id="inputTo" name="to" placeholder="To" onkeyup="checkValidEmailForm()" data-trigger="manual"
+          data-placement="bottom" data-content="กรุณาระบุผู้รับไม่เกิน 50 อีเมลล์.">
         </div>
         <div class="col-sm-1">
           <button type="button" class="btn btn-default" aria-label="Left Align" data-toggle="modal" data-target="#recipientsModal">
@@ -33,14 +33,16 @@
         <label for="inputTopic" id="lblInputTopic"  class="col-sm-2 control-label">Topic</label>
         <label for="inputTopic" class="col-sm-1 control-label">:</label>
         <div class="col-sm-8">
-          <input type="text" class="form-control" id="inputTopic" name="topic" max-lenght="500" placeholder="Topic" onkeyup="checkValidEmailForm()">
+          <input type="text" class="form-control" id="inputTopic" name="topic" placeholder="Topic" onkeyup="checkValidEmailForm()" data-trigger="manual"
+           data-placement="bottom" data-content="กรุณากรอกหัวข้อไม่เกิน 500 ตัวอักษร.">
         </div>
       </div>
       <div class="form-group">
         <label for="inputBody" id="lblInputBody" class="col-sm-2 control-label">Body</label>
         <label for="inputBody" class="col-sm-1 control-label">:</label>
         <div class="col-sm-8">
-          <textarea class="form-control" id="inputBody" name="body" rows="12" max-lenght="5000" onkeyup="checkValidEmailForm()"></textarea>
+          <textarea class="form-control" id="inputBody" name="body" rows="12" max-length ="5000" onkeyup="checkValidEmailForm()" data-trigger="manual"
+          data-placement="bottom" data-content="กรุณากรอกข้อความไม่เกิน 5000 ตัวอักษร."></textarea>
         </div>
       </div>
       <div class="form-group">
@@ -49,10 +51,6 @@
         </div>
       </div>
     </form>
-
-    <button type="button" class="btn btn-default" data-container="body" data-toggle="popover" data-placement="left" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus.">
-  Popover on left
-</button>
   </div>
         </div>
 
@@ -73,7 +71,6 @@
 
 <script type="riot/tag" src="/public/tags/recipientmanager.tag"></script>
 <script type="riot/tag" src="/public/tags/delim_text.tag"></script>
-
 <script src="/bower_components/riotjs/riot+compiler.min.js"></script>
 <script src="/bower_components/riotcontrol/riotcontrol.js"></script>
 <script src="/bower_components/jquery/dist/jquery.min.js"></script>
@@ -82,7 +79,6 @@
 <script src="/bower_components/ckeditor/ckeditor.js"></script>
 <script src="/public/js/recipients_app.js"></script>
 <script src="/public/js/recipientstore.js"></script>
-<script src="/public/javascript/index.js"></script>
 <script src="/public/javascript/ckeditor_config.js"></script>
 
 <script>
@@ -95,11 +91,13 @@
 </script>
 
 <script>
+
+  var sendEmailUrl = '/api/<%=sendEmailUrl%>/email'
   $(function () {
-    // Get data from CKeditor by CKEDITOR.instances['inputBody'].getData()
     $('[data-toggle="popover"]').popover()
   })
 </script>
+<script src="/public/javascript/index.js"></script>
 
 </body>
 </html>
