@@ -11,22 +11,9 @@ let app
 
 describe('recipients', () => {
     describe('Recipients validator', () => {
-        it('Should recipient validator return true', done => {
-            expect(recipientValidator.validateNewRecipient({
-                firstName: 'David',
-                lastName: 'Beckham',
-                email: 'david.beckham@gmail.com'
-            })).to.be.true
-            done()
-        })
-
-        it('Should recipient validate return false', done => {
-            expect(recipientValidator.validateNewRecipient({
-                firstName: 'David',
-                lastName: 'Beckham'
-            })).to.be.false
-            expect(recipientValidator.validateNewRecipient()).to.be.false
-            done()
-        })
+        // it('Should recipient validator return true', done => {
+            
+        //     done()
+        // })
     }) 
 })
