@@ -47,7 +47,7 @@ All label should be correct.
      Element Should Be Enabled    buttonSend
      Click Element    buttonSend
      ${popOverText}=    Get Text    xpath=//div[@class='popover-content']
-     Should Be Equal As Strings    ${popOverText}     กรุณาระบุผู้รับไม่เกิน 50 อีเมลล์.
+     Should Be Equal As Strings    ${popOverText}    กรุณาระบุผู้รับไม่เกิน 50 อีเมลล์.
 
 "Send" button should be enabled and popover show error when input "inputTopic" grater than 500 characters.
      Open Browser And Maximize Window
