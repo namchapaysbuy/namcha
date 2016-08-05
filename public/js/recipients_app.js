@@ -6,14 +6,18 @@ function RecipientsApp() {
 
 	this.addRecipientFromArr = (arr) => {
 		self.addRecipient({
-			firstName: arr[0],
-			lastName: arr[1],
+			firstname: arr[0],
+			lastname: arr[1],
 			email: arr[2]
 		})
 	}
 
 	this.addRecipient = (recipient) => {
 		RiotControl.trigger('recipient_add', recipient)
+	}
+
+	this.focusAddField = (e) => {
+		self.trigger('focus_add_field')
 	}
 
 }

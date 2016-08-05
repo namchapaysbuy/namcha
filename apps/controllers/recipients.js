@@ -2,43 +2,20 @@
 
 require('rootpath')()
 
-const config  = require('config/app')
-const helper = require('apps/helpers')
-const mongo = require('config/mongo')
-const User  = require('apps/models/user')
+const is = require('is_js')
 const recipientValidator = require('apps/validators/recipientValidator')
+const recipientFormatter = require('apps/services/recipientFormatter')
 const Recipient  = require('apps/models/recipient')
 
+const ERROR_MESSAGE = 'Incorrect format Ex.firstname, lastname, x@y.com'
+
 exports.addRecipient = (req, res) => {
-  if(!recipientValidator.validateNewRecipient(req.body)){
-    return res.send({
-      code: 403,
-      error: 'Incorrect format Ex.firstname, lastname, x@y.com'
-    })
+  if (!recipientValidator.validateNewRecipient(req.body)) {
+    return false
   }
-  else {
-    const recipientData = {
-      firstname: req.body.firstName,
-      lastname: req.body.lastName,
-      email: req.body.email
-    }
 
-    const recipient = new Recipient(recipientData)
-
-    recipient.save(err => {
-      if (err) {
-        return res.send({
-          code: 403,
-          error: err.message
-        })
-      }
-      else {
-        return res.send({
-          code: 201,
-          message: 'Success',
-          recipient: recipientData
-        })
-      }
-    })
-  }
+  const recipient = recipientFormatter.validRecipientFormat(req.body)
+  res.status(201)
+  return res.send({ code: 201, message: 'Success', recipient })
 }
+
