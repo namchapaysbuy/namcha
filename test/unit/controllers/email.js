@@ -15,7 +15,7 @@ let emailBody = {
   body: 'test body for one mail'
 }
 
-describe.skip('test email controller', () => {
+describe('test email controller', () => {
 
   describe('post to email handler', () => {
 
