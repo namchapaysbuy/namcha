@@ -33,13 +33,8 @@ describe('Recipients controllers', () => {
         }
         
         const res = {
-            _self: this,
-            send: () => {
-                
-            },
-            status: () => {
-
-            }
+            send: () => {},
+            status: () => {}
         }
         const spySend = res.send = sinon.spy()
         const spyStatus = res.status = sinon.spy()
