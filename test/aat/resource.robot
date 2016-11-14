@@ -7,6 +7,7 @@ Documentation     A resource file with reusable keywords and variables.
 Library           Selenium2Library
 
 *** Variables ***
+${URL}              http://localhost:3000/
 # ${SERVER}         ${URL}
 # ${BROWSER}        Firefox
 # ${DELAY}          0.5
@@ -17,6 +18,16 @@ Library           Selenium2Library
 # ${ERROR URL}      http://${SERVER}/error.html
 
 *** Keywords ***
+Open Browser And Maximize Window
+    Open Browser    ${URL}
+    Maximize Browser Window
+
+Input All Fields
+    [Arguments]     ${recipient}    ${topic}    ${body}
+    Fill Email Recipients    ${recipient}
+    Fill Email Topic         ${topic}
+    Fill Email Body          ${body}
+
 Open Email App
     Open Browser    ${URL}
     Title Should Be    Namcha e-mail
